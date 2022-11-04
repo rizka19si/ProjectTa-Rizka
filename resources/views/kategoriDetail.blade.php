@@ -16,36 +16,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projek TA</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" href="./img/svg/logo.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ URL::asset('./img/svg/logo.svg') }}" type="image/x-icon">
     <!-- Custom styles -->
-    <link rel="stylesheet" href="./css/style.min.css">
+    <link rel="stylesheet" href="{{ URL::asset('./css/style.min.css') }}">
 </head>
-<style>
-    .new-button {
-        display: block;
-
-        padding: 10px 11px;
-        cursor: pointer;
-        border-radius: 4px;
-        background-color: cornflowerblue;
-        font-size: 16px;
-        color: #fff;
-    }
-
-    input[type="file"] {
-        position: absolute;
-        z-index: -1;
-        top: 0px;
-        left: 0;
-        font-size: 15px;
-
-        color: rgb(153, 153, 153);
-    }
-
-    .button-wrap {
-        position: relative;
-    }
-</style>
 
 <body>
     <div class="layer"></div>
@@ -95,10 +69,10 @@
                             </a>
                             <ul class="cat-sub-menu visible">
                                 <li>
-                                    <a class="active" href="#">Produk</a>
+                                    <a href="/produk">Produk</a>
                                 </li>
                                 <li>
-                                    <a href="/kategori">Kategori</a>
+                                    <a class="active" href="/kategori">Kategori</a>
                                 </li>
                             </ul>
                         </li>
@@ -199,44 +173,52 @@
             <!-- ! Main -->
             <main class="main users chart-page" id="skip-target">
                 <div class="container">
-                    <h2 class="main-title" style="color: cornflowerblue">DAFTAR PRODUK INOVASI</h2>
-                    
-                   
-                    <h3 style="color: cornflowerblue; font-weight:400">Data Produk</h3>
+                    <h2 class="main-title" style="color: cornflowerblue">DAFTAR KATEGORI</h2>
+
+                    <h3 style="color: cornflowerblue; font-weight:400">Tambah Indikator</h3>
+                    <form action="/kategori/detailstore" method="POST">
+                    <div class="row" style="margin: 20px; width:100%">
+
+                        
+                            @csrf
+                            <input type="text" name="pertanyaan" placeholder="Masukan TKT"
+                                style="background-color:white; padding:10px; margin-right:10px; width:95%" required>
+                            @foreach ($kategori as $kate)
+                                <input type="hidden" name="idKategoriProduk" value="{{ $kate->idKategoriProduk }}">
+                            @endforeach
+                            <button type="submit"
+                                style="right:0px; background-color:cornflowerblue; width:150px; height:45px; margin-top:10px; border-radius:10px; color:white">
+                                Tambah </button>
+                        
+                    </div>
+                </form>
+                    <h3 style="color: cornflowerblue; font-weight:400">Data Indikator
+                        <b>{{ $kate->nama_kategori }}</b> </h3>
+
                     <div class="row" style="margin: 20px">
+
                         <div class="col">
 
                             <div class="users-table table-wrapper">
                                 <table class="posts-table">
                                     <thead>
                                         <tr class="users-table-info">
-                                            <th>
-                                                no
-                                            </th>
-                                            <th>Title</th>
-                                            <th>Katagori</th>
+
                                             <th>TKT</th>
-                                            <th>Segmen Customer</th>
-                                            <th> </th>
+                                            <th style="width: 8%">Aksi </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($produk as $item)
+                                        @foreach ($indikator as $item)
                                             <tr>
                                                 <td>
-                                                    {{ $item->id_Produk }}
+                                                    {{ $item->pertanyaan }}
                                                 </td>
+
                                                 <td>
-                                                    {{ $item->judul }}
-                                                </td>
-                                                <td>
-                                                    {{ $item->id_Produk }}
-                                                </td>
-                                                <td> {{ $item->nilai_tkt }}</td>
-                                                <td> {{ $item->segmen_customer }}</td>
-                                                <td>
-                                                    <a href="">
-                                                        < View>
+                                                    <a href="/kategori/detailhapus/{{ $item->idIndikator }}"
+                                                        style="color:red">
+                                                        < Hapus>
                                                     </a>
                                                 </td>
                                             </tr>
