@@ -62,7 +62,10 @@ class KategoriController extends Controller
             // ->join('indikator','indikator.idPert','=','kategori.idKategoriProduk')
             ->where('idKategoriProduk', '=', $id)
             ->get();
-        return view('kategoriDetail', ['kategori' => $kategori, 'indikator' => $indikator]);
+
+            $user = DB::table('users')->get();
+
+        return view('kategoriDetail', ['kategori' => $kategori, 'indikator' => $indikator, 'user' => $user]);
     }
     public function storePertanyaan(Request $request)
     {

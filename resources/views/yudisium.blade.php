@@ -199,8 +199,8 @@
                                 <option value="Privat">Privat</option>
                             </select>
                             <div class="button-wrap" style="margin-bottom: 10px;">
-                                <label class="new-button" for="upload"> Video Produk Inovasi
-                                    <input id="upload" type="file" style="margin-left: 79px">
+                                <label class="new-button" for="upload2"> Video Produk Inovasi
+                                    <input id="upload2" type="file" style="margin-left: 79px">
                                 </label>
                             </div>
                             
