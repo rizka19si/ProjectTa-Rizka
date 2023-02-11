@@ -23,6 +23,12 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('12345678'),
             'role' => '1',
         ],
+        [
+            'name' => 'Ardianto Wibowo',
+            'email' => 'ardie@.pcr.ac.id',
+            'password' => Hash::make('12345678'),
+            'role' => '1',
+        ],
         
     ]);
     }
