@@ -20,6 +20,21 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
+    return view('index');
+});
+Route::get('/indexproduk', function () {
+    return view('indexProduk');
+});
+
+Route::get('/indexdetail', function () {
+    return view('indexDetail');
+});
+
+Route::get('/loginUser', function () {
+    return view('login');
+});
+
+Route::get('/adminlogin', function () {
     return view('adminlogin');
 });
 Route::post('/adminlogin/auth', [LoginController::class, 'authenticate']);

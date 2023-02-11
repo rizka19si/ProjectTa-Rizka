@@ -31,31 +31,54 @@
             @include('nav.navbar')
             <!-- ! Main -->
             <main class="container main" id="skip-target">
-                <div class="container" id="home" style="width:100%; height:90vh; margin:0px">
-                    <div class="row" style="width:100%;height:100%; margin:0px;">
-                        <div class="col-lg-6"
+
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="container" id="product" style="width:100%; height:70vh; margin:0px">
+                    <div>
+                        <center>
+                            <div style="margin-bottom: 60px">
+                                <h1>Product Inovasi</h1>
+                            </div>
+                        </center>
+                       
+                    </div>
+                    <div class="row" style="width:100%; height:100%; margin:0px; display:flex; justify-content: center;" >
+
+
+                        <div class="col-lg-5"
                             style="display: flex;
-                            height: 100%;
+                           background-color:blue;
                             flex-direction: column;
                             align-items: center;
                             justify-content: center;">
-                            <h1 style="color: #00465f; font-size:56pt">PRODUK</h1>
-                            <h1 style="color: #00465f; font-size:56pt">INOVASI</h1>
-                            <br>
-                            <a class="primary-default-btn" style="border-radius: 20px; width:130px"
-                                href="#">Check</a>
+                            <div>
+                               <div class="row" style="width:100%; height:100%; margin:0px; display:flex; justify-content: center;">
+                                    <div class="col-lg-7" style="background-color: aqua;"> </div>
+                               </div>
+                            </div>
+                        </div>
 
+                        <div class="col-lg-5"
+                            style="display: flex;
+                           background-color:red;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;">
+                            <div>
+                                
+                            </div>
                         </div>
-                        <div class="col-lg-6"
-                            style="background-color: white; border-radius:10px; display:flex; flex-direction:row; align-items:center; padding:30px;">
-                            <img src="{{ URL::asset('img/gambar1.png') }}" />
-                        </div>
+
                     </div>
                     <div class="row" style="width:100%; margin:0px">
 
                     </div>
                 </div>
-                
             </main>
             <!-- ! Footer -->
 

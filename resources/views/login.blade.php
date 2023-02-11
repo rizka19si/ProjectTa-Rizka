@@ -30,32 +30,45 @@
             <!-- ! Main nav -->
             @include('nav.navbar')
             <!-- ! Main -->
-            <main class="container main" id="skip-target">
-                <div class="container" id="home" style="width:100%; height:90vh; margin:0px">
-                    <div class="row" style="width:100%;height:100%; margin:0px;">
-                        <div class="col-lg-6"
+            <main class="container main" id="skip-target"
+                style=" width:100vw; max-width:100vw; padding:0px; margin:0px">
+                <div class="container" id="home" style="width:100vw; height:100vh; margin:0px; padding:0px">
+                    <div style="width:100%; height:100%; margin:0px; display:flex">
+                        <div
                             style="display: flex;
+                            width:100%;
                             height: 100%;
                             flex-direction: column;
                             align-items: center;
                             justify-content: center;">
-                            <h1 style="color: #00465f; font-size:56pt">PRODUK</h1>
-                            <h1 style="color: #00465f; font-size:56pt">INOVASI</h1>
-                            <br>
-                            <a class="primary-default-btn" style="border-radius: 20px; width:130px"
-                                href="#">Check</a>
+                            <img src="{{ URL::asset('img/gambar2.png') }}" />
+
 
                         </div>
-                        <div class="col-lg-6"
-                            style="background-color: white; border-radius:10px; display:flex; flex-direction:row; align-items:center; padding:30px;">
-                            <img src="{{ URL::asset('img/gambar1.png') }}" />
+                        <div
+                            style="width:100%; 
+                            background-image: linear-gradient(to right, #428BCA , #96C7F1); 
+                            display:flex; 
+                            flex-direction:column; 
+                            align-items:center;
+                            justify-content: center;">
+
+                            <div class="white-block" style="display: flex; flex-direction:column; align-items:center; justify-content:center; width: 50%; height:50%">
+                                <h1>Login</h1>
+                                <hr>
+                                <input type="text" placeholder="Email" style="width: 90%; padding:10px; margin:10px"  />
+
+                                <input type="text" placeholder="Password" style="width: 90%; padding:10px; margin:10px"/>
+                                <button class="primary-default-btn" style="border-radius: 20px; width:130px; margin:10px"
+                                href="#">Login</button>
+                            </div>
                         </div>
                     </div>
                     <div class="row" style="width:100%; margin:0px">
 
                     </div>
                 </div>
-                
+
             </main>
             <!-- ! Footer -->
 

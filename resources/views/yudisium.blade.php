@@ -170,13 +170,13 @@
                 <div class="container">
                     <h2 class="main-title" style="color: cornflowerblue">Yudisium</h2>
                     <h3 style="color: cornflowerblue; font-weight:400"></h3>
-                    <form action="/produk/store" method="POST">
+                    <form action="/produk/store" method="POST" enctype="multipart/form-data">
                         <div class="row" style="margin: 20px">
                             @csrf
                             <input type="text" name="judul" placeholder="Masukan Judul"
                                 style="background-color:white; padding:10px; margin-right:10px; margin-bottom:10px; width:49%; "
                                 required>
-                            <textarea name="judul" placeholder="Masukan Judul"
+                            <textarea name="pesaing" placeholder="Gambaran Pesaing"
                                 style="background-color:white; padding:10px; margin-right:10px; margin-bottom:10px; width:49%; border-radius:5px; border:0px"
                                 required></textarea>
                             {{-- <input type="hidden" name="" value="-"> --}}
@@ -189,7 +189,7 @@
                             </select>
                             <div class="button-wrap" >
                                 <label class="new-button" for="upload" style="width: 180px"> Foto Produk Inovasi
-                                    <input id="upload" type="file" style="margin-left: 79px">
+                                    <input id="upload" name="mulfoto" type="file" style="margin-left: 79px" required multiple>
                                 </label>
                             </div>
                             <select name="segmen_customer"
@@ -251,7 +251,15 @@
                                                     {{ $item->judul }}
                                                 </td>
                                                 <td>
-                                                    {{ $item->id_Produk }}
+                                                    <?php
+                                                        
+                                                    foreach($kategori as $k){
+                                                        if ($k->idKategoriProduk == $item->id_Kategori ) {
+                                                            echo $k->nama_kategori;
+                                                        }
+                                                    }
+                                                        ?>
+                                                    
                                                 </td>
                                                 <td> {{ $item->nilai_tkt }}</td>
                                                 <td> {{ $item->segmen_customer }}</td>

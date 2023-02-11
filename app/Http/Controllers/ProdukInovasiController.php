@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FotoProduk;
 use App\Models\Produk;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 
 class ProdukInovasiController extends Controller
 {
@@ -19,20 +21,20 @@ class ProdukInovasiController extends Controller
         $users = DB::table('users')->get();
         $produk = DB::table('produk_inovasi')->get();
         $kategori = DB::table('kategori')->get();
-         
- 
-    	// mengirim data pegawai ke view index
-    	return view('produk',['produk' => $produk, 'kategori' => $kategori, 'user' => $users]);
+
+
+        // mengirim data pegawai ke view index
+        return view('produk', ['produk' => $produk, 'kategori' => $kategori, 'user' => $users]);
     }
     public function dashboard()
     {
-        $r= session()->get('email');
-        $users = DB::table('users')->where('email',$r)->get();
+        $r = session()->get('email');
+        $users = DB::table('users')->where('email', $r)->get();
         $produk = DB::table('produk_inovasi')->get();
         $kategori = DB::table('kategori')->get();
-        
-    	// mengirim data pegawai ke view index
-    	return view('dashboard',['produk' => $produk, 'kategori' => $kategori,'user' => $users]);
+
+        // mengirim data pegawai ke view index
+        return view('dashboard', ['produk' => $produk, 'kategori' => $kategori, 'user' => $users]);
     }
     /**
      * Show the form for creating a new resource.
@@ -52,14 +54,60 @@ class ProdukInovasiController extends Controller
      */
     public function store(Request $request)
     {
-        DB::table('produk_inovasi')->insert([
-            'id_Kategori' => $request->judul,
-            'judul' => $request->judul,
-            'segmen_customer' => $request->segmen_customer
-        ]);
-        // alihkan halaman ke halaman pegawai
-        return redirect('/produk');
+        $randomId = time() . $this->getRandomId(5);
+
+        // DB::table('produk_inovasi')->insert([
+        //     'id_Produk' => $randomId,
+        //     'id_Kategori' => $request->id_kategori,
+        //     'judul' => $request->judul,
+        //     'gambaran_pesaing' => $request->pesaing,
+        //     'segmen_customer' => $request->segmen_customer,
+        //     'key_partner' => $request->keypartner,
+        //     'uniques_selling_point' => $request->sellingpoint,
+        // ]);
+
+        // $request->validate([
+        //     'mulfoto' => 'required',
+        //     'mulfoto.*' => 'mimes:doc,docx,PDF,pdf,jpg,jpeg,png,PNG|max:2000'
+        // ]);
+        if ($request->hasfile('mulfoto')) {
+            $files = [];
+            foreach ($request->file('mulfoto') as $file) {
+                if ($file->isValid()) {
+                    $filename = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $file->getClientOriginalName());
+                    $file->move('img/ProdukImage/', $filename);
+                    $files[] = [
+                        'idProdukInovasi' => $randomId,
+                        'nama_foto' => $filename,
+                    ];
+                }
+            }
+
+            
+
+            FotoProduk::insert($files);
+            echo 'Success';
+        } else {
+            echo 'Gagal';
+        }
+
+        return redirect('/yudisium');
     }
+
+    function getRandomId($n)
+    {
+        $characters = '012345678';
+        $randomString = '';
+
+        for ($i = 0; $i < $n; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+
+        return $randomString;
+    }
+
+
 
     /**
      * Display the specified resource.
