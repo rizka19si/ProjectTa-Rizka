@@ -1,0 +1,116 @@
+.afbeeldingengalerij {
+    
+    width: 100%;
+  }
+  
+  .galerij {
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+    margin-bottom: 50px;
+    transition: 0.5s ease-in-out;
+  }
+  
+  .galerij-G {
+    position: relative;
+    width: 100%;
+    max-height: 500px;
+    margin-bottom: 25px;
+    transition: 0.5s ease-in-out;
+  }
+  
+  .galerij-G img {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    transition: 0.5s ease-in-out;
+  }
+  
+  .galerij-K {
+    display: flex;
+    position: relative;
+    gap: 25px;
+    overflow-x: hidden;
+    width: 100%;
+    transition: 0.5s ease-in-out;
+    scroll-behavior: smooth;
+  }
+  
+  .galerij-K img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .galerij-K img:not([selected]) {
+    cursor: pointer;
+    filter: brightness(50%);
+  }
+  
+  .galerij-K img:hover:not([selected]) {
+    filter: brightness(100%);
+  }
+  
+  .kimg {
+    flex-shrink: 0;
+    overflow: none;
+  }
+  
+  /* image carrousel aangepast aan 2K */
+  [data-kpics="2"] > .galerij > .galerij-K > .kimgwidth {
+    width: calc((100% - 25px) / 2);
+  }
+  
+  /* image carrousel aangepast aan 3K */
+  [data-kpics="3"] > .galerij > .galerij-K > .kimgwidth {
+    width: calc((100% - 50px) / 3);
+  }
+  
+  /* image carrousel aangepast aan 4K */
+  [data-kpics="4"] > .galerij > .galerij-K > .kimgwidth {
+    width: calc((100% - 75px) / 4);
+  }
+  
+  /* image carrousel aangepast aan 5K */
+  [data-kpics="5"] > .galerij > .galerij-K > .kimgwidth {
+    width: calc((100% - 100px) / 5);
+  }
+  
+  /* image carrousel aangepast aan 6K */
+  [data-kpics="6"] > .galerij > .galerij-K > .kimgwidth {
+    width: calc((100% - 125px) / 6);
+  }
+  
+  .galerij-chevron-L,
+  .galerij-chevron-R {
+    all: unset;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.5rem;
+    mix-blend-mode: multiply;
+  }
+  
+  .galerij-chevron-L button,
+  .galerij-chevron-R button {
+    all: unset;
+    transform: scale3d(1, 1, 1);
+    transition: 0.5s ease-in-out;
+  }
+  
+  .galerij-chevron-L button:hover,
+  .galerij-chevron-R button:hover {
+    cursor: pointer;
+    transform: scale3d(1.1, 1.1, 1.1);
+    transition: 0.5s ease-in-out;
+  }
+  
+  .galerij-chevron-L {
+    left: 10px;
+  }
+  
+  .galerij-chevron-R {
+    right: 10px;
+  }

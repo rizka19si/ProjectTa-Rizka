@@ -5,7 +5,7 @@
         
     } else {
         echo "<script>
-            location.href = '/ ';
+            location.href = '/adminlogin ';
         </script>";
     }
 @endphp
@@ -16,9 +16,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projek TA</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" href="./img/svg/logo.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ URL::asset('./img/svg/logo.svg') }}" type="image/x-icon">
     <!-- Custom styles -->
-    <link rel="stylesheet" href="./css/style.min.css">
+    <link rel="stylesheet" href="{{ URL::asset('./css/style.min.css') }}">
 </head>
 
 <body>
@@ -175,19 +175,25 @@
                 <div class="container">
                     <h2 class="main-title" style="color: cornflowerblue">DAFTAR KATEGORI</h2>
 
-                    <h3 style="color: cornflowerblue; font-weight:400">Tambah Kategori</h3>
-                    <div class="row" style="margin: 20px">
+                    <h3 style="color: cornflowerblue; font-weight:400">Tambah Indikator</h3>
+                    <form action="/kategori/detailstore" method="POST">
+                    <div class="row" style="margin: 20px; width:100%">
 
-                        <form action="/kategori/store" method="POST">
+                        
                             @csrf
-                            <input type="text" name="idKategoriProduk" placeholder="Masukan Id Katagori"
-                                style="background-color:white; padding:10px; margin-right:10px" required   >
-                                <input type="text" name="nama_kategori" placeholder="Masukan Nama Katagori"
-                                style="background-color:white; padding:10px; margin-right:10px" required   >
-                            <button type="submit" style="right:0px; background-color:cornflowerblue; width:150px; height:45px; border-radius:10px; color:white"> Tambah </button>
-                        </form>
+                            <input type="text" name="pertanyaan" placeholder="Masukan TKT"
+                                style="background-color:white; padding:10px; margin-right:10px; width:95%" required>
+                            @foreach ($kategori as $kate)
+                                <input type="hidden" name="idKategoriProduk" value="{{ $kate->idKategoriProduk }}">
+                            @endforeach
+                            <button type="submit"
+                                style="right:0px; background-color:cornflowerblue; width:150px; height:45px; margin-top:10px; border-radius:10px; color:white">
+                                Tambah </button>
+                        
                     </div>
-                    <h3 style="color: cornflowerblue; font-weight:400">Data Kategori</h3>
+                </form>
+                    <h3 style="color: cornflowerblue; font-weight:400">Data Indikator
+                        <b>{{ $kate->nama_kategori }}</b> </h3>
 
                     <div class="row" style="margin: 20px">
 
@@ -197,24 +203,23 @@
                                 <table class="posts-table">
                                     <thead>
                                         <tr class="users-table-info">
-                                            <th style="width: 8%">
-                                                Id Kategori
-                                            </th>
-                                            <th>Title</th>
+
+                                            <th>TKT</th>
                                             <th style="width: 8%">Aksi </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($kategori as $item)
+                                        @foreach ($indikator as $item)
                                             <tr>
                                                 <td>
-                                                    {{ $item->idKategoriProduk }}
+                                                    {{ $item->pertanyaan }}
                                                 </td>
+
                                                 <td>
-                                                    {{ $item->nama_kategori }}
-                                                </td>
-                                                <td >
-                                                    <a href="/kategori/detail/{{$item->idKategoriProduk}}" style="color:cornflowerblue"> < Detail > </a>
+                                                    <a href="/kategori/detailhapus/{{ $item->idIndikator }}"
+                                                        style="color:red">
+                                                        < Hapus>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach

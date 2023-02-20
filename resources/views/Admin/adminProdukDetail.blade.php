@@ -3,9 +3,9 @@
 @php
     if (session()->has('email') != null) {
     } else {
-        echo '<script>
-            location.href = '/ ';
-        </script>';
+        echo `<script>
+            location.href = '/adminlogin ';
+        </script>`;
     }
 @endphp
 @foreach ($user as $p)
@@ -18,8 +18,36 @@
         <!-- Favicon -->
         <link rel="shortcut icon" href="./img/svg/logo.svg" type="image/x-icon">
         <!-- Custom styles -->
-        <link rel="stylesheet" href="./css/style.min.css">
+        <link rel="stylesheet" href="{{ asset('css/style.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/gallery.css') }}">
+
     </head>
+    <style>
+        .new-button {
+            display: block;
+
+            padding: 10px 11px;
+            cursor: pointer;
+            border-radius: 4px;
+            background-color: cornflowerblue;
+            font-size: 16px;
+            color: #fff;
+        }
+
+        input[type="file"] {
+            position: absolute;
+            z-index: -1;
+            top: 0px;
+            left: 0;
+            font-size: 15px;
+
+            color: rgb(153, 153, 153);
+        }
+
+        .button-wrap {
+            position: relative;
+        }
+    </style>
 
     <body>
         <div class="layer"></div>
@@ -56,20 +84,19 @@
                     <div class="sidebar-body">
                         <ul class="sidebar-body-menu">
                             <li>
-                                <a class="active" href="/dashboard"><span class="icon home"
-                                        aria-hidden="true"></span>Dashboard</a>
+                                <a href="/dashboard"><span class="icon home" aria-hidden="true"></span>Dashboard</a>
                             </li>
                             <li>
-                                <a class="show-cat-btn" href="##">
+                                <a class="show-cat-btn active" href="##">
                                     <span class="icon document" aria-hidden="true"></span>Produk Inovasi
-                                    <span class="category__btn transparent-btn" title="Open list">
+                                    <span class="category__btn transparent-btn rotated" title="Open list">
                                         <span class="sr-only">Open list</span>
                                         <span class="icon arrow-down" aria-hidden="true"></span>
                                     </span>
                                 </a>
-                                <ul class="cat-sub-menu">
+                                <ul class="cat-sub-menu visible">
                                     <li>
-                                        <a href="/produk">Produk</a>
+                                        <a class="active" href="/produk">Produk</a>
                                     </li>
                                     <li>
                                         <a href="/kategori">Kategori</a>
@@ -174,68 +201,112 @@
                 </nav>
                 <!-- ! Main -->
                 <main class="main users chart-page" id="skip-target">
-                    <div class="container" style="width:100%; margin:0px">
-                        <h2 class="main-title">Dashboard</h2>
+                    <div class="container">
+                        <h2 class="main-title" style="color: cornflowerblue">DAFTAR PRODUK INOVASI</h2>
 
-                        <div class="row" style="width:100%; margin:0px;">
-                            <div class="chart"
-                                style="background-color: white; border-radius:10px; display:flex; flex-direction:row; align-items:center; padding:30px;">
-                                <div style="display:flex; align-items:center; flex-direction:column; margin-right:5%">
-                                    <div><img src="./img/avatar/avatar-illustrated-01.png" alt="Lala"
-                                            width="280" style="border-radius: 50%;"> </div>
+
+                        <h3 style="color: cornflowerblue; font-weight:400">Data Produk</h3>
+                        @foreach ($produk as $p)
+                            <div class="row"
+                                style="width:100%; height:100%; margin:0px; display:flex; justify-content: center;">
+                                <div class="col-lg-5">
+                                    <section data-galerijid="1" class="afbeeldingengalerij">
+                                        <section data-galerijid="1" data-kpics="5" class="afbeeldingengalerij">
+
+                                            <section class="galerij">
+                                                <div class="galerij-G">
+
+                                                    @foreach ($photo as $v)
+                                                        <div class="kimg kimgwidth"><img
+                                                                data-gitem="1"
+                                                                src="{{ asset('img/ProdukImage/' . $v->nama_foto) }}">
+                                                        </div>
+                                                    @endforeach
+
+                                                    <div class="galerij-chevron-L">
+                                                        <button data-chevron="links">
+                                                            &lt;</i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="galerij-chevron-R">
+                                                        <button data-chevron="rechts">
+                                                            &gt;</i>
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="galerij-K" data-kgalerij="1">
+                                                    @php
+                                                        $i = 0;
+                                                    @endphp
+                                                    @foreach ($photo as $foto)
+                                                        @php
+                                                            $i++;
+                                                        @endphp
+                                                        
+                                                        <div class="kimg kimgwidth"><img
+                                                                data-kitem="{{ $i }}"
+                                                                src="{{ asset('img/ProdukImage/' . $foto->nama_foto) }}">
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </section>
+                                            <section>
+                                                @foreach ($video as $vid)
+                                                            <video width="100%" data-kitem="1" controls>
+                                                                <source src="{{ asset('img/ProdukVideo/' . $vid->url) }}"
+                                                                    type="video/mp4">
+                                                            </video>
+                                                        @endforeach
+                                            </section>
+                                            <!-- </div> -->
+                                        </section>
+                                    </section>
+
+                                </div>
+
+                                <div class="col-lg-5"
+                                    style="display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;">
                                     <div>
-                                        <h3 style="color:cornflowerblue">{{ $p->name }}</h3>
+                                        <div style="padding:10px">
+                                            <h3 style="color:#234374">{{ $p->judul }}</h3>
+                                        </div>
+                                        <div style="padding:5px; color:grey">
+                                            <h6>TKT</h6>
+                                        </div>
+                                        <div style="padding:10px">
+                                            <h3 style="color:#234374">{{ $p->nilai_tkt }}</h3>
+                                        </div>
+                                        <div style="padding:5px; color:grey">
+                                            <h6>Segment Customer</h6>
+                                        </div>
+                                        <div style="padding:10px">
+                                            <h3 style="color:#234374">{{ $p->segmen_customer }}</h3>
+                                        </div>
+                                        <div style="padding:5px; color:grey">
+                                            <h6>Unique Selling Point</h6>
+                                        </div>
+                                        <div style="padding:10px">
+                                            <h3 style="color:#234374">{{ $p->uniques_selling_point }}</h3>
+                                        </div>
+                                        <div style="padding:5px; color:grey">
+                                            <h6>Gambaran Pesaing</h6>
+                                        </div>
+                                        <div style="padding:10px; color:#234374">
+                                            <p>{{ $p->gambaran_pesaing }}</p>
+                                        </div>
+                                        <div style="display:flex">
+                                        </div>
                                     </div>
-                                </div>
-                                <div style="display:flex; flex-direction:column;">
-                                  <label>nama lengkap</label>
-                                    <div><h3 style="color:cornflowerblue; margin-bottom:20px;">{{ $p->name }}</h3></div>
 
-                                    <label>email</label>
-                                    <div><h3 style="color:cornflowerblue; margin-bottom:20px;" >{{ $p->email }}</h3></div>
                                 </div>
+
                             </div>
-                        </div>
-                        <div class="row" style="width:100%; margin:0px">
-                          <div class="users-table table-wrapper">
-                            <table class="posts-table">
-                                <thead>
-                                    <tr class="users-table-info">
-                                        <th>
-                                            no
-                                        </th>
-                                        <th>Title</th>
-                                        <th>Katagori</th>
-                                        <th>TKT</th>
-                                        <th>Segmen Customer</th>
-                                        <th> </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($produk as $item)
-                                        <tr>
-                                            <td>
-                                                {{ $item->id_Produk }}
-                                            </td>
-                                            <td>
-                                                {{ $item->judul }}
-                                            </td>
-                                            <td>
-                                                {{ $item->id_Produk }}
-                                            </td>
-                                            <td> {{ $item->nilai_tkt }}</td>
-                                            <td> {{ $item->segmen_customer }}</td>
-                                            <td>
-                                                <a href="">
-                                                    < View>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        </div>
+                        @endforeach
                     </div>
                 </main>
                 <!-- ! Footer -->
@@ -255,7 +326,10 @@
         <!-- Icons library -->
         <script src="plugins/feather.min.js"></script>
         <!-- Custom scripts -->
-        <script src="js/script.js"></script>
+        <script src="{{ asset('js/script.js') }}"></script>
+
+        <script src="{{ asset('js/gallery.js') }}"></script>
+
     </body>
 @endforeach
 

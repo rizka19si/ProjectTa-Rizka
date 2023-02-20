@@ -16,12 +16,13 @@ return new class extends Migration
         Schema::create('produk_inovasi', function (Blueprint $table) {
             $table->bigIncrements("id_Produk", 255);
             $table->char("id_TKT", 255)->nullable();
+            $table->char("id_mahasiswa", 255)->nullable();
             $table->char("id_Kategori", 255)->nullable();
             $table->string("judul", 255)->nullable();
             $table->string("segmen_customer", 255)->nullable();
             $table->string("key_partner", 255)->nullable();
             $table->char("nilai_tkt", 255)->nullable();
-            $table->char("gambaran_pesaing", 255)->nullable();
+            $table->text("gambaran_pesaing")->nullable();
             $table->char("uniques_selling_point", 255)->nullable();
             $table->timestamps();
         });

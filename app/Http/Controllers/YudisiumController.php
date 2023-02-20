@@ -14,10 +14,11 @@ class YudisiumController extends Controller
 
         $produk = DB::table('produk_inovasi')->get();
         $kategori = DB::table('kategori')->get();
+        $indikator = DB::table('indikator')->get();
          
  
     	// mengirim data pegawai ke view index
-    	return view('yudisium',['produk' => $produk, 'kategori' => $kategori]);
+    	return view('Yudisium/yudisium',['produk' => $produk, 'kategori' => $kategori, 'indikator' => $indikator]);
     }
 
     /**
@@ -25,15 +26,18 @@ class YudisiumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
-    public function store(Request $request)
+    public function produkDetail($id)
     {
-        DB::table('produk_inovasi')->insert([
-            'id_Kategori' => $request->judul,
-            'judul' => $request->judul,
-            'segmen_customer' => $request->segmen_customer
-        ]);
-        // alihkan halaman ke halaman pegawai
-        return redirect('/produk');
+        $r = session()->get('email');
+        $users = DB::table('users')->where('email', $r)->get();
+        $produk = DB::table('produk_inovasi')->where('id_Produk','=',$id)->get();
+        $kategori = DB::table('kategori')->get();
+        $photo = DB::table('foto_produk')->where('idProdukInovasi','=',$id)->get();
+        $video = DB::table('video_produk')->where('idProdukInovasi','=',$id)->get();
+
+
+        // mengirim data pegawai ke view index
+        return view('Yudisium/yudisiumProdukDetail', ['produk' => $produk, 'kategori' => $kategori, 'user' => $users, 'photo' => $photo, 'video' => $video]);
     }
+    
 }

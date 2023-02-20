@@ -5,7 +5,7 @@
         
     } else {
         echo "<script>
-            location.href = '/ ';
+            location.href = '/adminlogin ';
         </script>";
     }
 @endphp
@@ -20,32 +20,6 @@
     <!-- Custom styles -->
     <link rel="stylesheet" href="./css/style.min.css">
 </head>
-<style>
-    .new-button {
-        display: block;
-
-        padding: 10px 11px;
-        cursor: pointer;
-        border-radius: 4px;
-        background-color: cornflowerblue;
-        font-size: 16px;
-        color: #fff;
-    }
-
-    input[type="file"] {
-        position: absolute;
-        z-index: -1;
-        top: 0px;
-        left: 0;
-        font-size: 15px;
-
-        color: rgb(153, 153, 153);
-    }
-
-    .button-wrap {
-        position: relative;
-    }
-</style>
 
 <body>
     <div class="layer"></div>
@@ -95,10 +69,10 @@
                             </a>
                             <ul class="cat-sub-menu visible">
                                 <li>
-                                    <a class="active" href="#">Produk</a>
+                                    <a href="/produk">Produk</a>
                                 </li>
                                 <li>
-                                    <a href="/kategori">Kategori</a>
+                                    <a class="active" href="/kategori">Kategori</a>
                                 </li>
                             </ul>
                         </li>
@@ -199,45 +173,48 @@
             <!-- ! Main -->
             <main class="main users chart-page" id="skip-target">
                 <div class="container">
-                    <h2 class="main-title" style="color: cornflowerblue">DAFTAR PRODUK INOVASI</h2>
-                    
-                   
-                    <h3 style="color: cornflowerblue; font-weight:400">Data Produk</h3>
+                    <h2 class="main-title" style="color: cornflowerblue">DAFTAR KATEGORI</h2>
+
+                    <h3 style="color: cornflowerblue; font-weight:400">Tambah Kategori</h3>
                     <div class="row" style="margin: 20px">
+
+                        <form action="/kategori/store" method="POST">
+                            @csrf
+                            <input type="text" name="idKategoriProduk" placeholder="Masukan Id Katagori"
+                                style="background-color:white; padding:10px; margin-right:10px" required   >
+                                <input type="text" name="nama_kategori" placeholder="Masukan Nama Katagori"
+                                style="background-color:white; padding:10px; margin-right:10px" required   >
+                            <button type="submit" style="right:0px; background-color:cornflowerblue; width:150px; height:45px; border-radius:10px; color:white"> Tambah </button>
+                        </form>
+                    </div>
+                    <h3 style="color: cornflowerblue; font-weight:400">Data Kategori</h3>
+
+                    <div class="row" style="margin: 20px">
+
                         <div class="col">
 
                             <div class="users-table table-wrapper">
                                 <table class="posts-table">
                                     <thead>
                                         <tr class="users-table-info">
-                                            <th>
-                                                no
+                                            <th style="width: 8%">
+                                                Id Kategori
                                             </th>
                                             <th>Title</th>
-                                            <th>Katagori</th>
-                                            <th>TKT</th>
-                                            <th>Segmen Customer</th>
-                                            <th> </th>
+                                            <th style="width: 8%">Aksi </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($produk as $item)
+                                        @foreach ($kategori as $item)
                                             <tr>
                                                 <td>
-                                                    {{ $item->id_Produk }}
+                                                    {{ $item->idKategoriProduk }}
                                                 </td>
                                                 <td>
-                                                    {{ $item->judul }}
+                                                    {{ $item->nama_kategori }}
                                                 </td>
-                                                <td>
-                                                    {{ $item->id_Produk }}
-                                                </td>
-                                                <td> {{ $item->nilai_tkt }}</td>
-                                                <td> {{ $item->segmen_customer }}</td>
-                                                <td>
-                                                    <a href="">
-                                                        < View>
-                                                    </a>
+                                                <td >
+                                                    <a href="/kategori/detail/{{$item->idKategoriProduk}}" style="color:cornflowerblue"> < Detail > </a>
                                                 </td>
                                             </tr>
                                         @endforeach

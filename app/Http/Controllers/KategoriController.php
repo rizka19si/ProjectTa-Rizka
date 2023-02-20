@@ -12,7 +12,7 @@ class KategoriController extends Controller
     public function index()
     {
 
-        return view('kategori', [
+        return view('Admin/adminKategori', [
             'kategori' => DB::table('kategori')->paginate(10), 'user' => DB::table('users')->get()
         ]);
     }
@@ -32,7 +32,7 @@ class KategoriController extends Controller
         DB::table('kategori')->where('idKategoriProduk', $id)->delete();
 
         // alihkan halaman ke halaman pegawai
-        return redirect('/kategori');
+        return redirect('/Kategori');
     }
     public function hapusPertanyaan($id)
     {
@@ -65,7 +65,7 @@ class KategoriController extends Controller
 
             $user = DB::table('users')->get();
 
-        return view('kategoriDetail', ['kategori' => $kategori, 'indikator' => $indikator, 'user' => $user]);
+        return view('Admin/adminKategoriDetail', ['kategori' => $kategori, 'indikator' => $indikator, 'user' => $user]);
     }
     public function storePertanyaan(Request $request)
     {

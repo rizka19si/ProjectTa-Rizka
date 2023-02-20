@@ -11,7 +11,7 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('adminlogin');
+        return view('Admin/adminLogin');
     }
     //
     public function authenticate(Request $request)
@@ -39,6 +39,17 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/adminlogin');
+    }
+
+    public function logoutUser(Request $request)
+    {
+        Auth::logout();
+        $request->session()->forget('email');
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return view('User/indexLogin');
     }
 }

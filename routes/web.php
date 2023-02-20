@@ -4,6 +4,7 @@ use App\Http\Controllers\KategoriController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdukInovasiController;
 use App\Http\Controllers\YudisiumController;
+use App\Http\Controllers\UtamaController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,30 +20,32 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-Route::get('/indexproduk', function () {
-    return view('indexProduk');
-});
 
-Route::get('/indexdetail', function () {
-    return view('indexDetail');
-});
+Route::get('/', [UtamaController::class, 'index']);
+Route::get('/indexproduk', [UtamaController::class, 'indexProduk']);
+Route::get('/indexdetail', [UtamaController::class, 'indexDetail']);
 
 Route::get('/loginUser', function () {
-    return view('login');
+    return view('User/indexLogin');
 });
 
 Route::get('/adminlogin', function () {
-    return view('adminlogin');
+    return view('Admin/adminLogin');
 });
+
+// Admin Login
 Route::post('/adminlogin/auth', [LoginController::class, 'authenticate']);
 Route::get('/adminlogin/logout', [LoginController::class, 'logout']);
+
+// User Login
+Route::get('/userlogin/logout', [LoginController::class, 'logoutUser']);
+
 
 
 Route::get('/produk', [ProdukInovasiController::class, 'index']);
 Route::post('/produk/store', [ProdukInovasiController::class, 'store']);
+Route::get('/produk/{id}', [ProdukInovasiController::class, 'produkDetail']);
+
 
 Route::get('/kategori', [KategoriController::class, 'index']);
 Route::post('/kategori/store', [KategoriController::class, 'store']);
@@ -55,3 +58,5 @@ Route::get('/kategori/detailhapus/{id}', [KategoriController::class, 'hapusPerta
 Route::get('/dashboard', [ProdukInovasiController::class, 'dashboard']);
 
 Route::get('/yudisium', [YudisiumController::class, 'index']);
+Route::get('/yudisium/{id}', [YudisiumController::class, 'produkDetail']);
+
