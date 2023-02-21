@@ -216,11 +216,18 @@
                                             <section class="galerij">
                                                 <div class="galerij-G">
 
+                                                    @php
+                                                        $o = 0;
+                                                    @endphp
                                                     @foreach ($photo as $v)
-                                                        <div class="kimg kimgwidth"><img
-                                                                data-gitem="1"
-                                                                src="{{ asset('img/ProdukImage/' . $v->nama_foto) }}">
-                                                        </div>
+                                                        @php
+                                                            $o++;
+                                                        @endphp
+                                                        @if ($o == 1)
+                                                            <div class="kimg kimgwidth"><img data-gitem="1"
+                                                                    src="{{ asset('img/ProdukImage/' . $v->nama_foto) }}">
+                                                            </div>
+                                                        @endif
                                                     @endforeach
 
                                                     <div class="galerij-chevron-L">
@@ -244,7 +251,7 @@
                                                         @php
                                                             $i++;
                                                         @endphp
-                                                        
+
                                                         <div class="kimg kimgwidth"><img
                                                                 data-kitem="{{ $i }}"
                                                                 src="{{ asset('img/ProdukImage/' . $foto->nama_foto) }}">
@@ -254,11 +261,11 @@
                                             </section>
                                             <section>
                                                 @foreach ($video as $vid)
-                                                            <video width="100%" data-kitem="1" controls>
-                                                                <source src="{{ asset('img/ProdukVideo/' . $vid->url) }}"
-                                                                    type="video/mp4">
-                                                            </video>
-                                                        @endforeach
+                                                    <video width="100%" data-kitem="1" controls>
+                                                        <source src="{{ asset('img/ProdukVideo/' . $vid->url) }}"
+                                                            type="video/mp4">
+                                                    </video>
+                                                @endforeach
                                             </section>
                                             <!-- </div> -->
                                         </section>

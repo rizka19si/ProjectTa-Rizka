@@ -156,14 +156,11 @@
                             </picture>
                         </span>
                         <div class="sidebar-user-info">
-                            <span class="sidebar-user__title">Nafisa Sh.</span>
-                            <span class="sidebar-user__subtitle">Support manager</span>
+                            <span class="sidebar-user__title">Rizka Faradilla</span>
+                            <span class="sidebar-user__subtitle">Mahasiswa</span>
                         </div>
                     </a>
-                    <button class="sidebar-toggle transparent-btn" title="Menu" type="button">
-                        <span class="sr-only">Toggle menu</span>
-                        <span class="icon menu-toggle" aria-hidden="true"></span>
-                    </button>
+                    
                 </div>
                 <div class="sidebar-body">
                     <ul class="sidebar-body-menu">
@@ -410,7 +407,7 @@
                                                     <td> {{ $item->segmen_customer }}</td>
                                                     <td>
                                                         <a href="/yudisium/{{$item->id_Produk}}">
-                                                            < View>
+                                                            < View >
                                                         </a>
                                                     </td>
                                                 </tr>

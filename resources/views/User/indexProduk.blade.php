@@ -31,7 +31,7 @@
             @include('nav.navbar')
             <!-- ! Main -->
             <main class="container main" id="skip-target">
-                
+
                 <br>
                 <br>
                 <br>
@@ -76,8 +76,11 @@
                     </div>
                     <div class="row" style="width:100%; height:100%; margin:0px;">
 
-                        
-                        <div class="col-lg-4"
+                        <div id="indikatorPertanyaan">
+
+
+                        </div>
+                        {{-- <div class="col-lg-4"
                             style="display: flex;
                             height: 50%;
                             flex-direction: column;
@@ -89,45 +92,12 @@
                                         src="https://awsimages.detik.net.id/community/media/visual/2016/01/07/4da80f4a-fe5e-4585-977d-5c3cae9e0ce2_169.jpg?w=700&q=90"
                                         alt=""> </div>
                                 <div style="padding: 10px">
-                                    <h4 style="color: #00465f"><a href="/indexdetail">Sistem Informasi Akuntansi</a></h4>
+                                    <h4 style="color: #00465f"><a href="/indexdetail">Sistem Informasi Akuntansi</a>
+                                    </h4>
                                     <h6 style="padding-top: 5px; color:#00465f">Rizka Faradilla </h6>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4"
-                            style="display: flex;
-                            height: 50%;
-                            flex-direction: column;
-                            align-items: center;
-                            justify-content: center;">
-                            <div
-                                style="box-shadow:0px 0px 10px 0px rgb(203, 203, 203) ;border-radius:10px; height:100%; width:100%; overflow:hidden">
-                                <div style="overflow:hidden; height:75%; background-size:cover"><img
-                                        src="https://awsimages.detik.net.id/community/media/visual/2016/01/07/4da80f4a-fe5e-4585-977d-5c3cae9e0ce2_169.jpg?w=700&q=90"
-                                        alt=""> </div>
-                                <div style="padding: 10px">
-                                    <h4 style="color: #00465f">Sistem Informasi Akuntansi</h4>
-                                    <h6 style="padding-top: 5px; color:#00465f">Rizka Faradilla </h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4"
-                            style="display: flex;
-                            height: 50%;
-                            flex-direction: column;
-                            align-items: center;
-                            justify-content: center;">
-                            <div
-                                style="box-shadow:0px 0px 10px 0px rgb(203, 203, 203) ;border-radius:10px; height:100%; width:100%; overflow:hidden">
-                                <div style="overflow:hidden; height:75%; background-size:cover"><img
-                                        src="https://awsimages.detik.net.id/community/media/visual/2016/01/07/4da80f4a-fe5e-4585-977d-5c3cae9e0ce2_169.jpg?w=700&q=90"
-                                        alt=""> </div>
-                                <div style="padding: 10px">
-                                    <h4 style="color: #00465f">Sistem Informasi Akuntansi</h4>
-                                    <h6 style="padding-top: 5px; color:#00465f">Rizka Faradilla </h6>
-                                </div>
-                            </div>
-                        </div>
+                        </div> --}}
 
                     </div>
                     <div class="row" style="width:100%; margin:0px">
@@ -145,6 +115,47 @@
     <script src="plugins/feather.min.js"></script>
     <!-- Custom scripts -->
     <script src="js/script.js"></script>
+
+    <script>
+        const head = document.getElementById('indikatorPertanyaan');
+
+        var i = 0;
+
+        //var text = idKategori.options[idKategori.selectedIndex].text;
+        fetch('http://127.0.0.1:8000/api/produk')
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                console.log(data);
+
+                data.forEach(produk => {
+                    i++;
+                    const markup = `<div class="col-lg-4"
+                            style="display: flex;
+                            height: 50%;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;">
+                            <div
+                                style="box-shadow:0px 0px 10px 0px rgb(203, 203, 203) ;border-radius:10px; height:100%; width:100%; overflow:hidden">
+                                <div style="overflow:hidden; height:75%; background-size:cover"><img
+                                        src="{{asset('img/ProdukImage')}}"
+                                        alt=""> </div>
+                                <div style="padding: 10px">
+                                    <h4 style="color: #00465f; text-overflow:elipsis;white-space: nowrap;
+  overflow: hidden;"><a href="/indexproduk/${produk.id_Produk}">${produk.judul}</a>
+                                    </h4>
+                                    <h6 style="padding-top: 5px; color:#00465f">Rizka Faradilla </h6>
+                                </div>
+                            </div>
+                        </div>`;
+                    head.innerHTML += markup;
+
+                });
+            })
+            .catch(error => console.log(error));
+    </script>
 </body>
 
 </html>

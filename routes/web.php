@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [UtamaController::class, 'index']);
 Route::get('/indexproduk', [UtamaController::class, 'indexProduk']);
-Route::get('/indexdetail', [UtamaController::class, 'indexDetail']);
+Route::get('/indexproduk/{id}', [UtamaController::class, 'produkDetail']);
 
 Route::get('/loginUser', function () {
     return view('User/indexLogin');

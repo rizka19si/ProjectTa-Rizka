@@ -10,7 +10,8 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="./img/svg/logo.svg" type="image/x-icon">
     <!-- Custom styles -->
-    <link rel="stylesheet" href="./css/style.min.css">
+    <link rel="stylesheet" href="{{ asset('css/style.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/gallery.css') }}">
     <style>
         html {
             scroll-behavior: smooth;
@@ -47,84 +48,113 @@
                         </center>
 
                     </div>
+                    @foreach ($produk as $p)
                     <div class="row"
                         style="width:100%; height:100%; margin:0px; display:flex; justify-content: center;">
+                        <div class="col-lg-5">
+                            <section data-galerijid="1" class="afbeeldingengalerij">
+                                <section data-galerijid="1" data-kpics="5" class="afbeeldingengalerij">
 
+                                    <section class="galerij">
+                                        <div class="galerij-G">
+                                            @php
+                                                $o = 0;
+                                            @endphp
+                                            @foreach ($photo as $v)
+                                                @php
+                                                    $o++;
+                                                @endphp
+                                                @if ($o == 1)
+                                                    <div class="kimg kimgwidth"><img data-gitem="1"
+                                                            src="{{ asset('img/ProdukImage/' . $v->nama_foto) }}">
+                                                    </div>
+                                                @endif
+                                            @endforeach
 
-                        <div class="col-lg-5"
-                            style="display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                            justify-content: center;">
-                            <div>
-                                <div class="row"
-                                    style="width:100%; height:100%; margin:0px; display:flex; justify-content: center;">
-                                    <div class="col-lg-10" style="padding:0px">
-                                        <div style="overflow:hidden; height:75%; background-size:cover"><img
-                                                src="https://awsimages.detik.net.id/community/media/visual/2016/01/07/4da80f4a-fe5e-4585-977d-5c3cae9e0ce2_169.jpg?w=700&q=90"
-                                                alt=""> </div>
-                                        <div style="display:flex">
-                                            <div class="col-lg-4" style="padding:0px"><img
-                                                    src="https://awsimages.detik.net.id/community/media/visual/2016/01/07/4da80f4a-fe5e-4585-977d-5c3cae9e0ce2_169.jpg?w=700&q=90"
-                                                    alt=""></div>
-                                            <div class="col-lg-4" style="padding:0px"><img
-                                                    src="https://awsimages.detik.net.id/community/media/visual/2016/01/07/4da80f4a-fe5e-4585-977d-5c3cae9e0ce2_169.jpg?w=700&q=90"
-                                                    alt=""></div>
-                                            <div class="col-lg-4" style="padding:0px"><img
-                                                    src="https://awsimages.detik.net.id/community/media/visual/2016/01/07/4da80f4a-fe5e-4585-977d-5c3cae9e0ce2_169.jpg?w=700&q=90"
-                                                    alt=""></div>
+                                            <div class="galerij-chevron-L">
+                                                <button data-chevron="links">
+                                                    &lt;</i>
+                                                </button>
+                                            </div>
+                                            <div class="galerij-chevron-R">
+                                                <button data-chevron="rechts">
+                                                    &gt;</i>
+                                                </button>
+                                            </div>
+
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
+
+                                        <div class="galerij-K" data-kgalerij="1">
+                                            @php
+                                                $i = 0;
+                                            @endphp
+                                            @foreach ($photo as $foto)
+                                                @php
+                                                    $i++;
+                                                @endphp
+
+                                                <div class="kimg kimgwidth"><img
+                                                        data-kitem="{{ $i }}"
+                                                        src="{{ asset('img/ProdukImage/' . $foto->nama_foto) }}">
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </section>
+                                    <section>
+                                        @foreach ($video as $vid)
+                                            <video width="100%" data-kitem="1" controls>
+                                                <source src="{{ asset('img/ProdukVideo/' . $vid->url) }}"
+                                                    type="video/mp4">
+                                            </video>
+                                        @endforeach
+                                    </section>
+                                    <!-- </div> -->
+                                </section>
+                            </section>
+
                         </div>
 
                         <div class="col-lg-5"
                             style="display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                            justify-content: center;">
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: flex-start;">
                             <div>
                                 <div style="padding:10px">
-                                    <h3 style="color:#234374">Aplikasi Mobile Learning Pembelajaran Matematika untuk Pendidikan Sekolah Dasar
-                                        menggunakan Andorid</h3>
+                                    <h3 style="color:#234374">{{ $p->judul }}</h3>
                                 </div>
                                 <div style="padding:5px; color:grey">
                                     <h6>TKT</h6>
                                 </div>
                                 <div style="padding:10px">
-                                    <h3 style="color:#234374">7</h3>
+                                    <h3 style="color:#234374">{{ $p->nilai_tkt }}</h3>
                                 </div>
                                 <div style="padding:5px; color:grey">
                                     <h6>Segment Customer</h6>
                                 </div>
                                 <div style="padding:10px">
-                                    <h3 style="color:#234374">Umum</h3>
+                                    <h3 style="color:#234374">{{ $p->segmen_customer }}</h3>
                                 </div>
                                 <div style="padding:5px; color:grey">
                                     <h6>Unique Selling Point</h6>
                                 </div>
                                 <div style="padding:10px">
-                                    <h3 style="color:#234374">efektif, menarik</h3>
+                                    <h3 style="color:#234374">{{ $p->uniques_selling_point }}</h3>
                                 </div>
                                 <div style="padding:5px; color:grey">
                                     <h6>Gambaran Pesaing</h6>
                                 </div>
                                 <div style="padding:10px; color:#234374">
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                        Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                        unknown printer took a galley of type and scrambled it to make a type specimen
-                                        book. </p>
+                                    <p>{{ $p->gambaran_pesaing }}</p>
                                 </div>
                                 <div style="display:flex">
                                 </div>
                             </div>
 
                         </div>
-                        <div class="row" style="width:100%; margin:0px">
 
-                        </div>
                     </div>
+                @endforeach
             </main>
             <!-- ! Footer -->
 
@@ -135,7 +165,9 @@
     <!-- Icons library -->
     <script src="plugins/feather.min.js"></script>
     <!-- Custom scripts -->
-    <script src="js/script.js"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
+
+        <script src="{{ asset('js/gallery.js') }}"></script>
 </body>
 
 </html>

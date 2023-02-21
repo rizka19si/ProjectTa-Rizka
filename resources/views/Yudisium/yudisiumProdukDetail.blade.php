@@ -1,14 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-@php
-    if (session()->has('email') != null) {
-    } else {
-        echo `<script>
-            location.href = '/adminlogin ';
-        </script>`;
-    }
-@endphp
-@foreach ($user as $p)
+
+
 
     <head>
         <meta charset="UTF-8">
@@ -66,20 +59,11 @@
                                 </picture>
                             </span>
                             <div class="sidebar-user-info">
-                                <span class="sidebar-user__title">{{ $p->name }}</span>
-                                <span class="sidebar-user__subtitle">
-                                    @if ($p->role == 1)
-                                        Admin Super
-                                    @elseif ($p->role == 2)
-                                        Mahasiswa
-                                    @endif
-                                </span>
+                                <span class="sidebar-user__title">Rizka Faradilla</span>
+                                <span class="sidebar-user__subtitle">Mahasiswa</span>
                             </div>
                         </a>
-                        <button class="sidebar-toggle transparent-btn" title="Menu" type="button">
-                            <span class="sr-only">Toggle menu</span>
-                            <span class="icon menu-toggle" aria-hidden="true"></span>
-                        </button>
+                       
                     </div>
                     <div class="sidebar-body">
                         <ul class="sidebar-body-menu">
@@ -90,7 +74,7 @@
                         <span class="system-menu__title"></span>
                         <ul class="sidebar-body-menu">
 
-                            
+
                         </ul>
                     </div>
                 </div>
@@ -186,12 +170,18 @@
 
                                             <section class="galerij">
                                                 <div class="galerij-G">
-
+                                                    @php
+                                                        $o = 0;
+                                                    @endphp
                                                     @foreach ($photo as $v)
-                                                        <div class="kimg kimgwidth"><img
-                                                                data-gitem="1"
-                                                                src="{{ asset('img/ProdukImage/' . $v->nama_foto) }}">
-                                                        </div>
+                                                        @php
+                                                            $o++;
+                                                        @endphp
+                                                        @if ($o == 1)
+                                                            <div class="kimg kimgwidth"><img data-gitem="1"
+                                                                    src="{{ asset('img/ProdukImage/' . $v->nama_foto) }}">
+                                                            </div>
+                                                        @endif
                                                     @endforeach
 
                                                     <div class="galerij-chevron-L">
@@ -215,7 +205,7 @@
                                                         @php
                                                             $i++;
                                                         @endphp
-                                                        
+
                                                         <div class="kimg kimgwidth"><img
                                                                 data-kitem="{{ $i }}"
                                                                 src="{{ asset('img/ProdukImage/' . $foto->nama_foto) }}">
@@ -225,11 +215,11 @@
                                             </section>
                                             <section>
                                                 @foreach ($video as $vid)
-                                                            <video width="100%" data-kitem="1" controls>
-                                                                <source src="{{ asset('img/ProdukVideo/' . $vid->url) }}"
-                                                                    type="video/mp4">
-                                                            </video>
-                                                        @endforeach
+                                                    <video width="100%" data-kitem="1" controls>
+                                                        <source src="{{ asset('img/ProdukVideo/' . $vid->url) }}"
+                                                            type="video/mp4">
+                                                    </video>
+                                                @endforeach
                                             </section>
                                             <!-- </div> -->
                                         </section>
@@ -241,7 +231,7 @@
                                     style="display: flex;
                             flex-direction: column;
                             align-items: center;
-                            justify-content: center;">
+                            justify-content: flex-start;">
                                     <div>
                                         <div style="padding:10px">
                                             <h3 style="color:#234374">{{ $p->judul }}</h3>
@@ -302,6 +292,6 @@
         <script src="{{ asset('js/gallery.js') }}"></script>
 
     </body>
-@endforeach
+
 
 </html>
