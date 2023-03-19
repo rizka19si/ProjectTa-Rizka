@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\ProdukController;
 use App\Http\Controllers\Api\IndikatorController;
+use App\Http\Controllers\Api\YudisiumController;
+
 use App\Models\Indikator;
 
 /*
@@ -26,6 +28,9 @@ Route::get('/kategori', [KategoriController::class,'index']);
 
 
 Route::get('/produk', [ProdukController::class,'index']);
+
+Route::get('/yudisium', [YudisiumController::class,'index']);
+Route::post('/yudisium', [YudisiumController::class,'store']);
 
 
 Route::get('/indikator',[IndikatorController::class,'index']);

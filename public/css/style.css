@@ -1865,9 +1865,17 @@ label {
 .users {
   /* Users Table */
 }
-
+.users-table  {
+ height: 30vh;
+ position: relative;
+ overflow: hidden;
+ border-radius: 10px;
+ overflow-y: scroll;
+ 
+}
 .users-table table {
   width: 100%;
+  height: 100%;
   text-align: left;
   border-collapse: collapse;
   line-height: 1.4;
@@ -1876,6 +1884,10 @@ label {
   -webkit-transition: none;
   -o-transition: none;
   transition: none;
+  position: relative;
+  
+
+ 
 }
 
 .users-table-info {
@@ -1910,12 +1922,22 @@ label {
   margin-right: 20px;
 }
 
+.users-table th {
+  background-color: #fff;
+  border-top: 1px solid #EEEEEE;
+  border-bottom: 1px solid #EEEEEE;
+  padding: 15px;
+  top: -1px;
+  position: sticky;
+}
+
+
 .users-table td {
   background-color: #fff;
   border-top: 1px solid #EEEEEE;
   border-bottom: 1px solid #EEEEEE;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding: 15px;
+  
 }
 
 .users-table td:first-child {
