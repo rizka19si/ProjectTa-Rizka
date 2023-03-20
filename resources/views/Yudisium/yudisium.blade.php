@@ -276,7 +276,7 @@
                                                 style="margin: 20px; display:flex; justify-content: flex-end;">
                                                 <div class="col">
 
-                                                    <div class="users-table table-wrapper">
+                                                    <div class="users-table">
                                                         <table class="posts-table">
                                                             <thead>
                                                                 <tr class="users-table-info">
@@ -293,11 +293,13 @@
 
                                                             </tbody>
                                                         </table>
+                                                       
                                                     </div>
-                                                </div>
-                                                <button type="button" id="spantkt"
-                                                    style="right:0; background-color:cornflowerblue; width:19%; height:40px; border-radius:10px; color:white">
+                                                    <button type="button" id="spantkt"
+                                                    style=" margin:10px; background-color:cornflowerblue; width:19%; height:40px; border-radius:10px; color:white">
                                                     Hitung</button>
+                                                </div>
+                                                
                                             </div>
                                         </div>
 
