@@ -11,9 +11,9 @@ class KategoriController extends Controller
 {
     public function index()
     {
-
+        $emailSes = session()->get('email');
         return view('Admin/adminKategori', [
-            'kategori' => DB::table('kategori')->paginate(10), 'user' => DB::table('users')->get()
+            'kategori' => DB::table('kategori')->paginate(10), 'user' => DB::table('users')->where('email','=',$emailSes)->get()
         ]);
     }
 
@@ -62,8 +62,8 @@ class KategoriController extends Controller
             // ->join('indikator','indikator.idPert','=','kategori.idKategoriProduk')
             ->where('idKategoriProduk', '=', $id)
             ->get();
-
-            $user = DB::table('users')->get();
+            $emailSes = session()->get('email');
+            $user = DB::table('users')->where('email','=',$emailSes)->get();
 
         return view('Admin/adminKategoriDetail', ['kategori' => $kategori, 'indikator' => $indikator, 'user' => $user]);
     }

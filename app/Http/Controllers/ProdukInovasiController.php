@@ -17,20 +17,23 @@ class ProdukInovasiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
+    
     {
-        $users = DB::table('users')->get();
+        $emailSes = session()->get('email');
+        $users = DB::table('users')->where('email','=',$emailSes)->get();
         $produk = DB::table('produk_inovasi')->get();
         $kategori = DB::table('kategori')->get();
-
+        
 
         // mengirim data pegawai ke view index
         return view('Admin/adminProduk', ['produk' => $produk, 'kategori' => $kategori, 'user' => $users]);
     }
     public function dashboard()
     {
-        $r = session()->get('email');
-        $users = DB::table('users')->where('email', $r)->get();
+        $emailSes = session()->get('email');
+        $users = DB::table('users')->where('email','=',$emailSes)->get();
         $produk = DB::table('produk_inovasi')->get();
         $kategori = DB::table('kategori')->get();
 
@@ -39,8 +42,8 @@ class ProdukInovasiController extends Controller
     }
     public function produkDetail($id)
     {
-        $r = session()->get('email');
-        $users = DB::table('users')->where('email', $r)->get();
+        $emailSes = session()->get('email');
+        $users = DB::table('users')->where('email','=',$emailSes)->get();
         $produk = DB::table('produk_inovasi')->where('id_Produk','=',$id)->get();
         $kategori = DB::table('kategori')->get();
         $photo = DB::table('foto_produk')->where('idProdukInovasi','=',$id)->get();

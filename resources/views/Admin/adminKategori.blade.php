@@ -10,6 +10,8 @@
     }
 @endphp
 @foreach($user as $p)
+
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -245,5 +247,7 @@
     <!-- Custom scripts -->
     <script src="js/script.js"></script>
 </body>
+
+
 @endforeach
 </html>
