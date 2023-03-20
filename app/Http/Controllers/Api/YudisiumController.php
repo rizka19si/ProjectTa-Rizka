@@ -76,18 +76,18 @@ class YudisiumController extends Controller
             }
             FotoProduk::insert($files);
 
-            $videoFile = [];
-            if ($request->hasfile('Video')) {
-                $video = $request->file('Video');
-                $videoname = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $video->getClientOriginalName());
-                $video->move('img/ProdukVideo/', $videoname);
-                $videoFile[] = [
-                    'idProdukInovasi' => $randomId,
-                    'keterangan' => $videoname,
-                    'url' => $videoname,
-                ];
-            }
-            VideoProduk::insert($videoFile);
+            // $videoFile = [];
+            // if ($request->hasfile('Video')) {
+            //     $video = $request->file('Video');
+            //     $videoname = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $video->getClientOriginalName());
+            //     $video->move('img/ProdukVideo/', $videoname);
+            //     $videoFile[] = [
+            //         'idProdukInovasi' => $randomId,
+            //         'keterangan' => $videoname,
+            //         'url' => $videoname,
+            //     ];
+            // }
+            // VideoProduk::insert($videoFile);
 
             if ($produk) {
                 return response()->json([

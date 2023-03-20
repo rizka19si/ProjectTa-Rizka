@@ -615,7 +615,7 @@
             var photosval = document.getElementById('photos');
             var photosLength = document.getElementById('photos').files.length;
             var tktval = document.getElementById('total').value;
-            var videoval = document.getElementById('videoProduk').files[0];
+         
             var segmenval = document.getElementById('segmen').value;
             var uniqueival = document.getElementById('unique').value;
             var keyval = document.getElementById('key_partner').value;
