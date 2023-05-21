@@ -24,8 +24,12 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [UtamaController::class, 'index']);
 Route::get('/indexproduk', [UtamaController::class, 'indexProduk']);
 Route::get('/indexproduk/{id}', [UtamaController::class, 'produkDetail']);
+Route::get('/indexprofil/{idMahasiswa}', [UtamaController::class, 'indexProfil']);
+Route::any('/indexproduk/search', [UtamaController::class, 'cari']);
 
-Route::get('/loginUser', function () {
+
+
+Route::get('/userlogin', function () {
     return view('User/indexLogin');
 });
 
@@ -38,6 +42,7 @@ Route::post('/adminlogin/auth', [LoginController::class, 'authenticate']);
 Route::get('/adminlogin/logout', [LoginController::class, 'logout']);
 
 // User Login
+Route::post('/userlogin/auth', [LoginController::class, 'authenticateUser']);
 Route::get('/userlogin/logout', [LoginController::class, 'logoutUser']);
 
 
@@ -52,8 +57,13 @@ Route::post('/kategori/store', [KategoriController::class, 'store']);
 Route::get('/kategori/hapus/{id}', [KategoriController::class, 'hapus']);
 
 Route::get('/kategori/detail/{id}', [KategoriController::class, 'detail']);
-Route::post('/kategori/detailstore', [KategoriController::class, 'storePertanyaan']);
-Route::get('/kategori/detailhapus/{id}', [KategoriController::class, 'hapusPertanyaan']);
+Route::get('/kategori/pertanyaan/{idKategoriProduk}/{idTkt}', [KategoriController::class, 'pertanyaan']);
+Route::post('/kategori/tktstore', [KategoriController::class, 'storeTKT']);
+Route::get('/kategori/tkthapus/{id}', [KategoriController::class, 'hapusTkt']);
+Route::post('/kategori/pertanyaanstore', [KategoriController::class, 'storePertanyaan']);
+Route::get('/kategori/pertanyaanhapus/{id}', [KategoriController::class, 'hapusPertanyaan']);
+
+
 
 Route::get('/dashboard', [ProdukInovasiController::class, 'dashboard']);
 

@@ -18,7 +18,7 @@
         padding: 10px 11px;
         cursor: pointer;
         border-radius: 4px;
-        background-color: cornflowerblue;
+        background-color: #234374;
         font-size: 16px;
         color: #fff;
     }
@@ -124,7 +124,7 @@
 
     .modal-header {
         padding: 16px;
-        background-color: cornflowerblue;
+        background-color: #234374;
         color: white;
     }
 
@@ -134,7 +134,7 @@
 
     .modal-footer {
         padding: 2px 16px;
-        background-color: cornflowerblue;
+        background-color: #234374;
         color: white;
     }
 </style>
@@ -214,10 +214,12 @@
             <!-- ! Main -->
             <main class="main users chart-page" id="skip-target">
                 <div class="container">
-                    <h2 class="main-title" id="testone" style="color: cornflowerblue">Yudisium</h2>
-                    <h3 style="color: cornflowerblue; font-weight:400"></h3>
+                    <h2 class="main-title" id="testone" style="color: #234374">Yudisium</h2>
+                    <h3 style="color: #234374; font-weight:400"></h3>
                     <span id="output"> </span>
-                    <form onsubmit="sendData()" id="yudisiumform" enctype="multipart/form-data">
+                    <form action="/produk/store" method="POST" {{-- onsubmit="SendData()"  --}} id="yudisiumform"
+                        enctype="multipart/form-data">
+                        @csrf
                         <div class="container">
                             <div class="row">
 
@@ -236,32 +238,34 @@
                                 {{-- <input type="hidden" name="" value="-"> --}}
 
                                 <div class="col-lg-5">
-                                    <select name="id_Kategori" id="IdKategori" onchange="indikatornilai(this.value)"
+                                    <select name="id_Kategori" id="IdKategori"
+                                        onchange="onChangeIdKategori(this.value,0)"
                                         style="border:0px; width:100%; height:40px; border-radius:5px; padding:10px; color:grey; margin-right:10px; margin-bottom:10px">
                                         <option value=" " selected disabled>Pilih Kategori</option>
-                                        {{-- @foreach ($kategori as $kate)
+                                        @foreach ($kategori as $kate)
                                             <option value="{{ $kate->idKategoriProduk }}"> {{ $kate->nama_kategori }}
                                             </option>
-                                        @endforeach --}}
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-lg-5">
                                     <div class="button-wrap">
                                         <label class="new-button" for="photos" style="width: 180px"> Foto Produk
                                             Inovasi
-                                            <input id="photos"  name="Photos[]" type="file"
+                                            <input id="photos" name="Photos[]" type="file"
                                                 style="margin-left: 72px" accept="image/png, image/jpeg, image/jpg"
                                                 required multiple>
                                         </label>
                                     </div>
                                 </div>
+
                                 <div class="col-lg-5">
-                                    <input type="text" name="nilai_tkt" placeholder="TKT" value="" class="form-input"
-                                        id="total"
+                                    <input type="text" name="nilai_tkt" placeholder="TKT" value=""
+                                        class="form-input" id="total"
                                         style="background-color:white; padding:10px; margin-bottom:10px; width:50%;"
                                         readonly required>
                                     <button id="tktbtn" type="button"
-                                        style="right:0px; background-color:cornflowerblue; width:19%; height:40px; border-radius:10px; color:white">
+                                        style="right:0px; background-color:#234374; width:19%; height:40px; border-radius:10px; color:white">
                                         Ukur </button>
                                 </div>
                                 <div id="modaltkt" class="modal">
@@ -293,27 +297,27 @@
 
                                                             </tbody>
                                                         </table>
-                                                       
+
                                                     </div>
-                                                    <button type="button" id="spantkt"
-                                                    style=" margin:10px; background-color:cornflowerblue; width:19%; height:40px; border-radius:10px; color:white">
-                                                    Hitung</button>
+                                                    <button type="button" onclick="nilaical()"
+                                                        style=" margin:10px; background-color:#234374; width:19%; height:40px; border-radius:10px; color:white">
+                                                        Hitung</button>
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
 
                                     </div>
 
                                 </div>
-                                {{-- <div class="col-lg-5">
+                                <div class="col-lg-5">
                                     <div class="button-wrap" style="margin-bottom: 10px;">
                                         <label class="new-button" for="videoProduk"> Video Produk Inovasi
                                             <input id="videoProduk" name="Video" type="file"
                                                 accept="video/mp4, video/x-m4v" style="margin-left: 79px" required>
                                         </label>
                                     </div>
-                                </div> --}}
+                                </div>
                                 <div class="col-lg-5">
                                     <select id="segmen" name="segmen_customer"
                                         style="border:0px; width:100%; height:40px; border-radius:5px; padding:10px; color:grey; margin-right:10px; margin-bottom:10px;"
@@ -337,9 +341,19 @@
                                         required>
                                 </div>
                                 <div class="col-lg-5">
-                                    <input type="text" id="id_mahasiswa" name="id_mahasiswa" value="1"
+                                <select name="id_mahasiswa" style="background-color:white; padding:10px; margin-right:10px; margin-bottom:10px; width:100%; "
+                                    >
+                                    <option selected disabled hidden>Pilih User (Debug use only)</option>
+                                        @foreach ($users as $u)
+                                            
+                                        <option value="{{$u->id}}">
+                                        {{$u->name}}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                    {{-- <input type="text" id="id_mahasiswa" name="id_mahasiswa" value="1"
                                         style="background-color:white; padding:10px; margin-right:10px; margin-bottom:10px; width:100%; "
-                                        hidden required>
+                                         required> --}}
                                 </div>
 
 
@@ -348,7 +362,7 @@
                         </div>
                         <div class="row" style="margin: 20px">
                             <button type="submit"
-                                style="right:0px; background-color:cornflowerblue; width:150px; height:45px; border-radius:10px; color:white">
+                                style="right:0px; background-color:#234374; width:150px; height:45px; border-radius:10px; color:white">
                                 Simpan </button>
                         </div>
 
@@ -372,31 +386,55 @@
                             modal.style.display = "block"
                         </script>
                     @endif
-                    
-                        <h3 style="color: cornflowerblue; font-weight:400">Data Produk</h3>
-                        <div class="row" style="margin: 20px">
-                            <div class="col">
 
-                                <div class="users-table">
-                                    <table class="posts-table">
-                                        <thead>
-                                            <tr class="users-table-info">
-                                                <th style="width: 15%">id</th>
-                                                <th style="width: 40%">Title</th>
-                                                <th>Katagori</th>
-                                                <th>TKT</th>
-                                                <th>Segmen Customer</th>
-                                                <th> </th>
+                    <h3 style="color: #234374; font-weight:400">Data Produk</h3>
+                    <div class="row" style="margin: 20px">
+                        <div class="col">
+
+                            <div class="users-table">
+                                <table class="posts-table">
+                                    <thead>
+                                        <tr class="users-table-info">
+                                            <th style="width: 15%">id</th>
+                                            <th style="width: 40%">Title</th>
+                                            <th>Katagori</th>
+                                            <th>TKT</th>
+                                            <th>Segmen Customer</th>
+                                            <th> </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody {{-- id="tableData" --}}>
+                                        @foreach ($produk as $p)
+                                            <tr>
+                                                <td>
+                                                    {{ $p->id_Produk }}
+                                                </td>
+                                                <td>
+                                                    {{ $p->judul }}
+                                                </td>
+                                                <td>
+                                                    @foreach ($kategori as $k)
+                                                        @if ($k->idKategoriProduk == $p->id_Kategori)
+                                                            {{ $k->nama_kategori }}
+                                                        @endif
+                                                    @endforeach
+
+                                                </td>
+                                                <td> {{ $p->nilai_tkt }}</td>
+                                                <td> {{ $p->segmen_customer }}</td>
+                                                <td>
+                                                    <a href="/yudisium/{{ $p->id_Produk }}">
+                                                        < View>
+                                                    </a>
+                                                </td>
                                             </tr>
-                                        </thead>
-                                        <tbody id="tableData">
-                                           
-                                        </tbody>
-                                    </table>
-                                </div>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                 
+                    </div>
+
                 </div>
             </main>
             <!-- ! Footer -->
@@ -447,18 +485,14 @@
         // Get the button that opens the modal
         var btntkt = document.getElementById("tktbtn");
 
-        // Get the <span> element that closes the modal
-        var spantkt = document.getElementById("spantkt");
+
 
         // When the user clicks the button, open the modal 
         btntkt.onclick = function() {
             modaltkt.style.display = "block";
         }
 
-        // When the user clicks on <span> (x), close the modal
-        spantkt.onclick = function() {
-            modaltkt.style.display = "none";
-        }
+
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
@@ -471,7 +505,7 @@
     <script>
         var httphost = window.location.origin;
         const tableData = document.getElementById('tableData');
-        tableData.innerHTML = `Mohon Pilih Kategori Terlebih Dahulu.`;
+        // tableData.innerHTML = `Mohon Pilih Kategori Terlebih Dahulu.`;
         window.onload = (event) => {
             fetch(httphost + '/api/yudisium')
                 .then(res => {
@@ -513,50 +547,46 @@
     <script>
         var idKategori = document.getElementById("IdKategori");
         const head = document.getElementById('indikatorPertanyaan');
-
-
         head.innerHTML = `<tr>
                             <td></td>
                             <td>Mohon Pilih Kategori Terlebih Dahulu.</td>
                             <td></td>
                         </tr>`;
-        indikator();
-        var i = 0;
 
-        function indikator() {
-            fetch(httphost + '/api/kategori')
+        var i = 0;
+        var indexInfo = 0;
+        var n = 0;
+        var idKategori = 0;
+
+        function onChangeIdKategori(valu, index) {
+            var tktTemp = 0;
+
+            fetch(httphost + '/api/tktcount/' + valu)
                 .then(res => {
                     return res.json();
+                }).then(tktCount => {
+                    // console.log(tktCount[0]);
+                    indikatornilai(valu, tktCount[index].idTkt);
+                    return parseInt(tktCount[index].idTkt);
                 })
-                .then(data => {
-                    console.log(data);
-
-                    data.forEach(kate => {
-
-                        const markup = `<option value="${kate.idKategoriProduk}"> ${kate.nama_kategori}
-                                            </option>`;
-                        idKategori.innerHTML += markup;
-
-                    });
-                })
-                .catch(error => console.log(error));
-
+                .catch(error => {
+                    console.log(error);
+                    modaltkt.style.display = "none";
+                    nilaical();
+                });
         }
 
-        function indikatornilai(valu) {
-            var value = idKategori.value;
-
+        function indikatornilai(valu, tktInfo) {
+           
             head.replaceChildren();
-            console.log(value);
-            //var text = idKategori.options[idKategori.selectedIndex].text;
 
-            fetch(httphost + '/api/indikator/' + valu)
+            fetch(httphost + '/api/indikator/' + valu + '/' + tktInfo)
                 .then(res => {
                     return res.json();
                 })
                 .then(data => {
                     console.log(data);
-
+                    head.replaceChildren();
                     data.forEach(indi => {
                         i++;
                         const markup = `<tr>
@@ -567,7 +597,7 @@
                                                 ${indi.pertanyaan}
                                             </td>
                                             <td>
-                                                <select name="nilaitkt${i}" id="nilaitkt${i}" onchange="nilaical()"
+                                                <select name="nilaitkt${i}" id="nilaitkt${i}"
                                                 style="border:0px; width:80%; height:40px; padding:10px; color:grey;">
                                                     <option value="0">0%</option>
                                                     <option value="20">20%</option>
@@ -579,24 +609,36 @@
                                             </td>
                                         </tr>`;
                         head.innerHTML += markup;
-
+                        return idKategori = indi.idKategoriProduk;
                     });
                 })
                 .catch(error => console.log(error));
-            return i;
-
-
         }
-
         function nilaical() {
             var nilai = 0;
             var total = 0;
-            for (let g = 0; g < i; g++) {
+            var g = 0;
+            for (g; g < i; g++) {
                 nilai += parseFloat(document.getElementById(`nilaitkt${g+1}`).value);
                 console.log(nilai);
             }
             total = nilai / i;
-            document.getElementById('total').value = (total.toFixed(2) + '%');
+            n = (total.toFixed(0));
+            if (n >= 80) {
+                indexInfo++
+                onChangeIdKategori(idKategori, indexInfo);
+                i = 0;
+                g = 0;
+            } else {
+                if (indexInfo == 0) {
+                    modaltkt.style.display = "none";
+                    document.getElementById('total').value = 'TKT 0';
+                } else {
+                    modaltkt.style.display = "none";
+                    document.getElementById('total').value = 'TKT ' + (indexInfo);
+                }
+            }
+
             console.log(total);
 
 
@@ -615,7 +657,7 @@
             var photosval = document.getElementById('photos');
             var photosLength = document.getElementById('photos').files.length;
             var tktval = document.getElementById('total').value;
-         
+
             var segmenval = document.getElementById('segmen').value;
             var uniqueival = document.getElementById('unique').value;
             var keyval = document.getElementById('key_partner').value;

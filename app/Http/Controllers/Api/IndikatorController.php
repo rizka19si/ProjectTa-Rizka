@@ -13,10 +13,14 @@ class IndikatorController extends Controller
         $indikator = Indikator::latest()->get();
         return response()->json($indikator);
     }
-    public function IndikatorShow($id)
+    public function IndikatorShow($idKategoriProduk, $idTkt)
     {
-        $indikator = Indikator::latest()->where('idKategoriProduk','=',$id)->get();
+        $indikator = Indikator::latest()->where([['idKategoriProduk',$idKategoriProduk],['idTkt',$idTkt]])->get();
         return $indikator;
+    }
+    public function tktCount($idKategoriProduk){
+        $tkt = Indikator::where('idKategoriProduk',$idKategoriProduk)->groupBy('idTkt')->get();
+        return $tkt;
     }
 
 }

@@ -74,7 +74,7 @@ class YudisiumController extends Controller
                     ];
                 }
             }
-            FotoProduk::insert($files);
+            $fotoInput = FotoProduk::insert($files);
 
             // $videoFile = [];
             // if ($request->hasfile('Video')) {
@@ -89,7 +89,7 @@ class YudisiumController extends Controller
             // }
             // VideoProduk::insert($videoFile);
 
-            if ($produk) {
+            if ($produk && $fotoInput) {
                 return response()->json([
                     'success' => true,
                     'message' => 'Post Berhasil Disimpan!',

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->bigIncrements("idIndikator");
             $table->string("pertanyaan");
             $table->char("idKategoriProduk");
+            $table->char("idTkt");
             $table->timestamps();
         });
     }

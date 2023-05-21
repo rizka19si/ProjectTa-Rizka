@@ -11,5 +11,5 @@ class Indikator extends Model
 
     protected $table = "indikator";
     protected $primaryKey = "idIndikator";
-    protected $fillable = ["idIndikator", "pertanyaan", "idKategoriProduk", "created_at", "updated_at"];
+    protected $fillable = ["idIndikator", "pertanyaan", "idKategoriProduk","idTkt", "created_at", "updated_at"];
 }

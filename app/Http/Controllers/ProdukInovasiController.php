@@ -26,9 +26,14 @@ class ProdukInovasiController extends Controller
         $produk = DB::table('produk_inovasi')->get();
         $kategori = DB::table('kategori')->get();
         
+        $userRole = DB::table('users')->where('email','=',$emailSes)->value('role');
 
         // mengirim data pegawai ke view index
-        return view('Admin/adminProduk', ['produk' => $produk, 'kategori' => $kategori, 'user' => $users]);
+        if($userRole != "3"){
+            return view('Admin/adminProduk', ['produk' => $produk, 'kategori' => $kategori, 'user' => $users]);
+        }else{
+            return redirect('/');
+        }
     }
     public function dashboard()
     {
@@ -37,20 +42,28 @@ class ProdukInovasiController extends Controller
         $produk = DB::table('produk_inovasi')->get();
         $kategori = DB::table('kategori')->get();
 
-        // mengirim data pegawai ke view index
-        return view('Admin/adminDashboard', ['produk' => $produk, 'kategori' => $kategori, 'user' => $users]);
+
+        $userRole = DB::table('users')->where('email','=',$emailSes)->value('role');
+
+        if($userRole != "3"){
+            return view('Admin/adminDashboard', ['produk' => $produk, 'kategori' => $kategori, 'user' => $users]);
+        }else{
+            return redirect('/');
+        }
+
+        
     }
     public function produkDetail($id)
     {
         $emailSes = session()->get('email');
         $users = DB::table('users')->where('email','=',$emailSes)->get();
-        $produk = DB::table('produk_inovasi')->where('id_Produk','=',$id)->get();
+        $produk = DB::table('produk_inovasi')->where('id_Produk',$id)->get();
         $kategori = DB::table('kategori')->get();
         $photo = DB::table('foto_produk')->where('idProdukInovasi','=',$id)->get();
         $video = DB::table('video_produk')->where('idProdukInovasi','=',$id)->get();
 
 
-        // mengirim data pegawai ke view index
+
         return view('Admin/adminProdukDetail', ['produk' => $produk, 'kategori' => $kategori, 'user' => $users, 'photo' => $photo, 'video' => $video]);
     }
 
@@ -77,14 +90,14 @@ class ProdukInovasiController extends Controller
         
         DB::table('produk_inovasi')->insert([
             'id_Produk' => $randomId,
-            'id_Kategori' => $request->id_kategori,
+            'id_Kategori' => $request->id_Kategori,
             'id_mahasiswa' => $request->id_mahasiswa,
             'judul' => $request->judul,
-            'gambaran_pesaing' => $request->pesaing,
+            'gambaran_pesaing' => $request->gambaran_pesaing,
             'segmen_customer' => $request->segmen_customer,
-            'key_partner' => $request->keypartner,
-            'nilai_tkt' => $request->tkt,
-            'uniques_selling_point' => $request->sellingpoint,
+            'key_partner' => $request->key_partner,
+            'nilai_tkt' => $request->nilai_tkt,
+            'uniques_selling_point' => $request->uniques_selling_point,
         ]);
 
         $request->validate([

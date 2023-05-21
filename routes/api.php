@@ -34,6 +34,8 @@ Route::post('/yudisium', [YudisiumController::class,'store']);
 
 
 Route::get('/indikator',[IndikatorController::class,'index']);
-Route::get('/indikator/{id}',[IndikatorController::class,'IndikatorShow']);
+Route::get('/indikator/{idKategoriProduk}/{idTkt}',[IndikatorController::class,'IndikatorShow']);
+Route::get('/tktcount/{id}',[IndikatorController::class,'tktCount']);
+
 
 

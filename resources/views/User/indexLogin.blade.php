@@ -32,8 +32,9 @@
             <!-- ! Main -->
             <main class="container main" id="skip-target"
                 style=" width:100vw; max-width:100vw; padding:0px; margin:0px">
+
                 <div class="container" id="home" style="width:100vw; height:100vh; margin:0px; padding:0px">
-                    <div style="width:100%; height:100%; margin:0px; display:flex">
+                    <div style="width:100vw; height:100%; margin:0px; display:flex">
                         <div
                             style="display: flex;
                             width:100%;
@@ -52,16 +53,24 @@
                             flex-direction:column; 
                             align-items:center;
                             justify-content: center;">
-
-                            <div class="white-block" style="display: flex; flex-direction:column; align-items:center; justify-content:center; width: 50%; height:50%">
+                            <div class="white-block"
+                                style="display: flex; flex-direction:column; align-items:center; justify-content:center; width: 50%; height:50%">
                                 <h1>Login</h1>
                                 <hr>
-                                <input type="text" placeholder="Email" style="width: 90%; padding:10px; margin:10px"  />
+                                <form action="userlogin/auth" method="POST">
+                                    @csrf
+                                    <input type="text" name="email" placeholder="Email"
+                                        style="width: 90%; padding:10px; margin:10px" />
 
-                                <input type="text" placeholder="Password" style="width: 90%; padding:10px; margin:10px"/>
-                                <button class="primary-default-btn" style="border-radius: 20px; width:130px; margin:10px"
-                                href="#">Login</button>
+                                    <input type="password" name="password" placeholder="Password"
+                                        style="width: 90%; padding:10px; margin:10px" />
+                                    <button type="submit" class="primary-default-btn"
+                                        style="border-radius: 20px; width:130px; margin:10px"
+                                        >Login</button>
+                                </form>
+
                             </div>
+
                         </div>
                     </div>
                     <div class="row" style="width:100%; margin:0px">

@@ -1,59 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Projek TA</title>
-        <!-- Favicon -->
-        <link rel="shortcut icon" href="./img/svg/logo.svg" type="image/x-icon">
-        <!-- Custom styles -->
-        <link rel="stylesheet" href="./css/style.min.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projek TA</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./img/svg/logo.svg" type="image/x-icon">
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="./css/style.min.css">
+</head>
 
-    <body >
-        <div class="layer"></div>
-        <!-- ! Body -->
-     
-        <div class="page-flex">
-            <!-- ! Sidebar -->
-            
-            <div class="main-wrapper" style="position: fixed; z-index:9999">
-                <!-- ! Main nav -->
-                <nav class="main-nav--bg">
-                    <div class="container main-nav">
-                        <div class="main-nav-start">
-                            <img src="{{ URL::asset('img/pcr.png') }}" width="250" />
-                        </div>
-                        <div class="main-nav-end">
-                            <a href="/"><p>Home</p></a>
-                            <a href="/indexproduk"><p>Product</p></a>
+<body>
+    <div class="layer"></div>
+    <!-- ! Body -->
 
-                            
-                            <div class="notification-wrapper">
-                                <a href="/loginUser" class="primary-default-btn" style="border-radius: 20px; width:110px" title="To messages" type="button">
-                                 
+    <div class="page-flex">
+        <!-- ! Sidebar -->
+
+        <div class="main-wrapper" style="position: fixed; z-index:9999">
+            <!-- ! Main nav -->
+            <nav class="main-nav--bg">
+                <div class="container main-nav">
+                    <div class="main-nav-start">
+                        <img src="{{ URL::asset('img/pcr.png') }}" width="250" />
+                    </div>
+                    <div class="main-nav-end">
+                        <a href="/">
+                            <p>Home</p>
+                        </a>
+                        <a href="/indexproduk">
+                            <p>Product</p>
+                        </a>
+
+
+                        <div class="notification-wrapper">
+                            @if (session()->get('name') == null)
+                                <a href="/userlogin" class="primary-default-btn"
+                                    style="border-radius: 20px; width:110px" title="To messages" type="button">
                                     Login
                                 </a>
-                             
-                            </div>
+                            @else
+                                <a href="/indexprofil/{{session()->get('id')}}" class="primary-default-btn"
+                                    style="border-radius: 300px; " title="To messages" type="button">
+                                    {{ substr(session()->get('name'),0,1) }}
+                                </a>
+                            @endif
+
 
                         </div>
+
                     </div>
-                </nav>
-                <!-- ! Main -->
-              
-             
-            </div>
+                </div>
+            </nav>
+            <!-- ! Main -->
+
+
         </div>
-        <!-- Chart library -->
-        <script src="./plugins/chart.min.js"></script>
-        <!-- Icons library -->
-        <script src="plugins/feather.min.js"></script>
-        <!-- Custom scripts -->
-        <script src="js/script.js"></script>
-    </body>
+    </div>
+    <!-- Chart library -->
+    <script src="./plugins/chart.min.js"></script>
+    <!-- Icons library -->
+    <script src="plugins/feather.min.js"></script>
+    <!-- Custom scripts -->
+    <script src="js/script.js"></script>
+</body>
 
 
 </html>

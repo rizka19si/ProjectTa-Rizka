@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Kategori;
 use App\Models\Produk;
+use App\Models\User;
 
 class YudisiumController extends Controller
 {
@@ -15,10 +16,11 @@ class YudisiumController extends Controller
         $produk = DB::table('produk_inovasi')->get();
         $kategori = DB::table('kategori')->get();
         $indikator = DB::table('indikator')->get();
+        $users = User::get();
          
  
     	// mengirim data pegawai ke view index
-    	return view('Yudisium/yudisium',['produk' => $produk, 'kategori' => $kategori, 'indikator' => $indikator]);
+    	return view('Yudisium/yudisium',['produk' => $produk, 'kategori' => $kategori, 'indikator' => $indikator,'users'=>$users]);
     }
 
     /**

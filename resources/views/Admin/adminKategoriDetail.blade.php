@@ -33,7 +33,7 @@
                     <a href="##" class="logo-wrapper">
                         <span class="sidebar-user-img">
                             <picture>
-                                <source srcset="./img/avatar/avatar-illustrated-01.webp" type="image/webp"><img
+                                <source srcset="{{asset('/img/avatar/avatar-illustrated-01.webp')}}" type="image/webp"><img
                                     src="./img/avatar/avatar-illustrated-01.png" alt="User name">
                             </picture>
                         </span>
@@ -173,26 +173,24 @@
             <!-- ! Main -->
             <main class="main users chart-page" id="skip-target">
                 <div class="container">
-                    <h2 class="main-title" style="color: cornflowerblue">DAFTAR KATEGORI</h2>
+                    @foreach ($kategori as $klink)
+                    @endforeach
+                    <h2 class="main-title" style="color: cornflowerblue"><a href="http://127.0.0.1:8000/kategori">DAFTAR KATEGORI</a> / {{$klink->nama_kategori}}</h2>
 
-                    <h3 style="color: cornflowerblue; font-weight:400">Tambah Indikator</h3>
-                    <form action="/kategori/detailstore" method="POST">
+                    <h3 style="color: cornflowerblue; font-weight:400">Tambah TKT </h3>
+                    <form action="/kategori/tktstore" method="POST">
                     <div class="row" style="margin: 20px; width:100%">
-
-                        
                             @csrf
-                            <input type="text" name="pertanyaan" placeholder="Masukan TKT"
-                                style="background-color:white; padding:10px; margin-right:10px; width:95%" required>
                             @foreach ($kategori as $kate)
                                 <input type="hidden" name="idKategoriProduk" value="{{ $kate->idKategoriProduk }}">
                             @endforeach
                             <button type="submit"
                                 style="right:0px; background-color:cornflowerblue; width:150px; height:45px; margin-top:10px; border-radius:10px; color:white">
-                                Tambah </button>
+                                Tambah TKT</button>
                         
                     </div>
                 </form>
-                    <h3 style="color: cornflowerblue; font-weight:400">Data Indikator
+                    <h3 style="color: cornflowerblue; font-weight:400">Data TKT
                         <b>{{ $kate->nama_kategori }}</b> </h3>
 
                     <div class="row" style="margin: 20px">
@@ -209,17 +207,24 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($indikator as $item)
+                                        @foreach ($tkt as $item)
                                             <tr>
                                                 <td>
-                                                    {{ $item->pertanyaan }}
+                                                    {{ $item->tkt }}
                                                 </td>
-
+                                               
                                                 <td>
-                                                    <a href="/kategori/detailhapus/{{ $item->idIndikator }}"
-                                                        style="color:red">
-                                                        < Hapus>
+                                                    <a href="/kategori/pertanyaan/{{ $item->idKategoriProduk }}/{{$item->idTkt}}"
+                                                        style="color:blue">
+                                                        < Edit >
                                                     </a>
+                                                    &nbsp;
+                                                    &nbsp;
+                                                    <a href="/kategori/tkthapus/{{ $item->idTkt }}"
+                                                        style="color:red">
+                                                        < Hapus >
+                                                    </a>
+                                                    
                                                 </td>
                                             </tr>
                                         @endforeach

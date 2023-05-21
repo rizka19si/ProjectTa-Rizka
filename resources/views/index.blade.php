@@ -43,7 +43,7 @@
                             <h1 style="color: #00465f; font-size:56pt">INOVASI</h1>
                             <br>
                             <a class="primary-default-btn" style="border-radius: 20px; width:130px"
-                                href="#">Check</a>
+                                href="/indexproduk">Check</a>
 
                         </div>
                         <div class="col-lg-6"

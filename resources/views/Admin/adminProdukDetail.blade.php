@@ -61,7 +61,7 @@
                         <a href="##" class="logo-wrapper">
                             <span class="sidebar-user-img">
                                 <picture>
-                                    <source srcset="./img/avatar/avatar-illustrated-01.webp" type="image/webp"><img
+                                    <source srcset="{{asset('/img/avatar/avatar-illustrated-01.webp')}}" type="image/webp"><img
                                         src="./img/avatar/avatar-illustrated-01.png" alt="User name">
                                 </picture>
                             </span>
@@ -224,13 +224,13 @@
                                                             $o++;
                                                         @endphp
                                                         @if ($o == 1)
-                                                            <div class="kimg kimgwidth"><img data-gitem="1"
+                                                            <div class="kimg kimgwidth"><img data-gitem="1" style="border-radius:20px"
                                                                     src="{{ asset('img/ProdukImage/' . $v->nama_foto) }}">
                                                             </div>
                                                         @endif
                                                     @endforeach
 
-                                                    <div class="galerij-chevron-L">
+                                                    <div class="galerij-chevron-L" >
                                                         <button data-chevron="links">
                                                             &lt;</i>
                                                         </button>
@@ -252,7 +252,7 @@
                                                             $i++;
                                                         @endphp
 
-                                                        <div class="kimg kimgwidth"><img
+                                                        <div class="kimg kimgwidth"><img style="border-radius:5px"
                                                                 data-kitem="{{ $i }}"
                                                                 src="{{ asset('img/ProdukImage/' . $foto->nama_foto) }}">
                                                         </div>
@@ -261,7 +261,7 @@
                                             </section>
                                             <section>
                                                 @foreach ($video as $vid)
-                                                    <video width="100%" data-kitem="1" controls>
+                                                    <video width="100%" height="280px" data-kitem="1" controls style="border-radius: 20px">
                                                         <source src="{{ asset('img/ProdukVideo/' . $vid->url) }}"
                                                             type="video/mp4">
                                                     </video>
@@ -277,7 +277,7 @@
                                     style="display: flex;
                             flex-direction: column;
                             align-items: center;
-                            justify-content: center;">
+                            justify-content: flex-start;">
                                     <div>
                                         <div style="padding:10px">
                                             <h3 style="color:#234374">{{ $p->judul }}</h3>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -17,10 +18,30 @@ class UtamaController extends Controller
 
        public function indexProduk()
        {
-              $produk = DB::table('produk_inovasi')->get();
-              $kategori = DB::table('kategori')->get();
 
-              return view('User/indexProduk', ['produk' => $produk, 'kategori' => $kategori]);
+              $produk = DB::table('produk_inovasi')->paginate(3);
+              $fotoproduk = DB::table('foto_produk')->get();
+              $kategori = DB::table('kategori')->get();
+              $users = DB::table('users')->get();
+              return view('User/indexProduk', ['produk' => $produk, 'kategori' => $kategori, 'fotoproduk' => $fotoproduk, 'users' => $users]);
+       }
+       public function indexProfil($idMahasiswa)
+       {
+              $produk = DB::table('produk_inovasi')->where('id_mahasiswa',$idMahasiswa)->get();
+              $fotoproduk = DB::table('foto_produk')->get();
+              $kategori = DB::table('kategori')->get();
+              $users = DB::table('users')->where('id',$idMahasiswa)->get();
+              return view('User/indexProfile', ['produk' => $produk, 'kategori' => $kategori, 'fotoproduk' => $fotoproduk, 'users' => $users]);
+       }
+
+       public function cari(Request $request)
+       {
+              $produk = DB::table('produk_inovasi')->whereRaw("judul LIKE '".$request->cari."%'")->paginate(3);
+              $produk->appends(['cari'=> $request->cari,]);
+              $fotoproduk = DB::table('foto_produk')->get();
+              $kategori = DB::table('kategori')->get();
+              $users = DB::table('users')->get();
+              return view('User/indexProduk', ['produk' => $produk, 'kategori' => $kategori, 'fotoproduk' => $fotoproduk, 'users' => $users]);
        }
        public function indexDetail()
        {
