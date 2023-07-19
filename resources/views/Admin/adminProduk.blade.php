@@ -304,7 +304,7 @@
 
 
                         <h3 style="color: cornflowerblue; font-weight:400"></h3>
-                        <form action="/produk/store" method="POST" {{-- onsubmit="SendData()"  --}} id="yudisiumform"
+                        <form action="/produk/store" method="POST" id="yudisiumform"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="container">

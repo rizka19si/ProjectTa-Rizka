@@ -28,7 +28,7 @@ class LoginController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'password atau email anda salah',
         ])->onlyInput('email');
     }
 
@@ -67,7 +67,7 @@ class LoginController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'password atau email anda salah.',
         ])->onlyInput('email');
     }
 
