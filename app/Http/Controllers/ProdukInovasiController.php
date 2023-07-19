@@ -134,7 +134,7 @@ class ProdukInovasiController extends Controller
             }
             VideoProduk::insert($videoFile);
 
-            return redirect('/yudisium');
+            return redirect()-back();
         } else {
             return redirect()->back()->with('failed_upload', 'Your Photo is size is not under 2000kb or wrong extention.');
         }

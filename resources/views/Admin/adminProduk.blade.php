@@ -433,7 +433,7 @@
                                     </div>
                                     <div class="col-lg-5">
                                         
-                                        <input type="text" id="id_mahasiswa" name="id_mahasiswa" value="{{session()->get('id')}}"
+                                        <input type="text" id="id_mahasiswa" name="id_mahasiswa" value="{{Auth::user()->id}}"
                                         style="background-color:white; padding:10px; margin-right:10px; margin-bottom:10px; width:100%; "
                                         hidden required>
                                     </div>
