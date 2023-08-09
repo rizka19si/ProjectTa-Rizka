@@ -27,17 +27,28 @@ class UtamaController extends Controller
        }
        public function indexProfil($idMahasiswa)
        {
-              $produk = DB::table('produk_inovasi')->where('id_mahasiswa',$idMahasiswa)->get();
+              $produk = DB::table('produk_inovasi')->where('id_mahasiswa', $idMahasiswa)->get();
               $fotoproduk = DB::table('foto_produk')->get();
               $kategori = DB::table('kategori')->get();
-              $users = DB::table('users')->where('id',$idMahasiswa)->get();
+              $users = DB::table('users')->where('id', $idMahasiswa)->get();
               return view('User/indexProfile', ['produk' => $produk, 'kategori' => $kategori, 'fotoproduk' => $fotoproduk, 'users' => $users]);
        }
 
        public function cari(Request $request)
        {
-              $produk = DB::table('produk_inovasi')->whereRaw("judul LIKE '".$request->cari."%'")->paginate(3);
-              $produk->appends(['cari'=> $request->cari,]);
+              if ($request->filled('cari') && $request->filled('jenis') && $request->filled('kategori')) {
+                     $produk = DB::table('produk_inovasi')->whereRaw("judul LIKE '" . $request->cari . "%'")->paginate(3);
+
+              } elseif ($request->filled('cari')) {
+                     $produk = DB::table('produk_inovasi')->whereRaw("judul LIKE '" . $request->cari . "%'")->paginate(3);
+              } elseif ($request->filled('jenis')) {
+                     $produk = DB::table('produk_inovasi')->where("jenis", $request->jenis)->paginate(3);
+              } elseif ($request->filled('kategori')) {
+                     $produk = DB::table('produk_inovasi')->where("id_Kategori", $request->kategori)->paginate(3);
+              }
+
+              // $produk = DB::table('produk_inovasi')->whereRaw("judul LIKE '" . $request->cari . "%'")->paginate(3);
+              // $produk->appends(['cari' => $request->cari,]);
               $fotoproduk = DB::table('foto_produk')->get();
               $kategori = DB::table('kategori')->get();
               $users = DB::table('users')->get();

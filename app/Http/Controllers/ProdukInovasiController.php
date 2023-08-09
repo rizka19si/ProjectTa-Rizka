@@ -6,7 +6,9 @@ use App\Models\FotoProduk;
 use App\Models\Produk;
 use App\Models\Kategori;
 use App\Models\VideoProduk;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
@@ -35,18 +37,44 @@ class ProdukInovasiController extends Controller
             return redirect('/');
         }
     }
-    public function dashboard()
+
+    public function filter(Request $req)
+    
     {
         $emailSes = session()->get('email');
         $users = DB::table('users')->where('email','=',$emailSes)->get();
-        $produk = DB::table('produk_inovasi')->get();
+        $produk = DB::table('produk_inovasi')->where('id_Kategori',$req->id_Kategori)->where('segmen_customer',$req->segmen_customer)->get();
         $kategori = DB::table('kategori')->get();
+        
+        $userRole = DB::table('users')->where('email','=',$emailSes)->value('role');
+
+        // mengirim data pegawai ke view index
+        if($userRole != "3"){
+            return view('Admin/adminProduk', ['produk' => $produk, 'kategori' => $kategori, 'user' => $users]);
+        }else{
+            return redirect('/');
+        }
+    }
+    public function dashboard()
+    {
+        if(session()->get('role') != "3"){
+        $startDate = Carbon::now();
+        $endDate = Carbon::now()->subDays(5);
+        $emailSes = session()->get('email');
+        $users = DB::table('users')->where('email','=',$emailSes)->get();
+        $produk = DB::table('produk_inovasi')->get();
+        $perJenis = DB::table('produk_inovasi')->select('jenis',DB::raw('COUNT(*) as jumlah'))->groupBy('jenis')->get();
+        $perKategori = DB::table('produk_inovasi')->select('id_Kategori',DB::raw('COUNT(*) as jumlah'))->groupBy('id_Kategori')->get();
+
+        $produkBaru = Produk::whereBetween("created_at",[$endDate,$startDate])->get();
+        $kategori = DB::table('kategori')->get();
+    
 
 
         $userRole = DB::table('users')->where('email','=',$emailSes)->value('role');
 
-        if($userRole != "3"){
-            return view('Admin/adminDashboard', ['produk' => $produk, 'kategori' => $kategori, 'user' => $users]);
+     
+            return view('Admin/adminDashboard', ['perKategori'=>$perKategori,'perJenis'=>$perJenis,'produkBaru' => $produkBaru,'produk' => $produk, 'kategori' => $kategori, 'user' => $users]);
         }else{
             return redirect('/');
         }
@@ -88,17 +116,7 @@ class ProdukInovasiController extends Controller
     {
         $randomId = round(time()/20000) . $this->getRandomId(5);
         
-        DB::table('produk_inovasi')->insert([
-            'id_Produk' => $randomId,
-            'id_Kategori' => $request->id_Kategori,
-            'id_mahasiswa' => $request->id_mahasiswa,
-            'judul' => $request->judul,
-            'gambaran_pesaing' => $request->gambaran_pesaing,
-            'segmen_customer' => $request->segmen_customer,
-            'key_partner' => $request->key_partner,
-            'nilai_tkt' => $request->nilai_tkt,
-            'uniques_selling_point' => $request->uniques_selling_point,
-        ]);
+        
 
         $request->validate([
             'Video' => 'required',
@@ -115,11 +133,23 @@ class ProdukInovasiController extends Controller
                         'idProdukInovasi' => $randomId,
                         'nama_foto' => $filename,
                     ];
+                    Produk::create([
+                        'id_Produk' => $randomId,
+                        'id_Kategori' => $request->id_Kategori,
+                        'id_mahasiswa' => $request->id_mahasiswa,
+                        'judul' => $request->judul,
+                        'gambaran_pesaing' => $request->gambaran_pesaing,
+                        'segmen_customer' => $request->segmen_customer,
+                        'key_partner' => $request->key_partner,
+                        'nilai_tkt' => $request->nilai_tkt,
+                        'jenis' => $request->jenis,
+                        'uniques_selling_point' => $request->uniques_selling_point,
+                    ]);
                 } else {
                     return redirect()->back()->withErrors(['msg', 'Your Photo is size is not under 2000kb or wrong extention.']);
                 }
             }
-            FotoProduk::insert($files);
+            FotoProduk::create($files);
 
             $videoFile = [];
             if ($request->hasfile('Video')) {
@@ -132,9 +162,9 @@ class ProdukInovasiController extends Controller
                     'url' => $videoname,
                 ];
             }
-            VideoProduk::insert($videoFile);
+            VideoProduk::create($videoFile);
 
-            return redirect('/yudisium');
+            return redirect()->back();
         } else {
             return redirect()->back()->with('failed_upload', 'Your Photo is size is not under 2000kb or wrong extention.');
         }
@@ -184,9 +214,57 @@ class ProdukInovasiController extends Controller
      * @param  \App\Models\Produk  $produk
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Produk $produk)
+    public function update(Request $request)
     {
-        //
+        DB::table('produk_inovasi')->where("id_Produk",$request->id_produk)->update([
+            'judul' => $request->judul,
+            'gambaran_pesaing' => $request->gambaran_pesaing,
+            'segmen_customer' => $request->segmen_customer,
+            'key_partner' => $request->key_partner,    
+            'jenis' => $request->jenis,
+            'uniques_selling_point' => $request->uniques_selling_point,
+        ]);
+
+        $request->validate([
+            'Video' => 'required',
+            'Photos' => 'required',
+            'Photos.*' => 'mimes:doc,docx,PDF,pdf,jpg,jpeg,png,PNG|max:2000'
+        ]);
+        if ($request->hasfile('Photos')) {
+            $files = [];
+            foreach ($request->file('Photos') as $file) {
+                if ($file->isValid()) {
+                    FotoProduk::where("idProdukInovasi",$request->id_produk)->delete();
+                    $filename = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $file->getClientOriginalName());
+                    $file->move('img/ProdukImage/', $filename);
+                    $files[] = [
+                        'idProdukInovasi' => $request->id_produk,
+                        'nama_foto' => $filename,
+                    ];
+                } else {
+                    return redirect()->back()->withErrors(['msg', 'Your Photo is size is not under 2000kb or wrong extention.']);
+                }
+            }
+            FotoProduk::insert($files);
+
+            $videoFile = [];
+            if ($request->hasfile('Video')) {
+                VideoProduk::where("idProdukInovasi",$request->id_produk)->delete();
+                $video = $request->file('Video');
+                $videoname = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $video->getClientOriginalName());
+                $video->move('img/ProdukVideo/', $videoname);
+                $videoFile[] = [
+                    'idProdukInovasi' => $request->id_produk,
+                    'keterangan' => $videoname,
+                    'url' => $videoname,
+                ];
+            }
+            VideoProduk::insert($videoFile);
+
+            return redirect()->back();
+        } else {
+            return redirect()->back()->with('failed_upload', 'Your Photo is size is not under 2000kb or wrong extention.');
+        }
     }
 
     /**
@@ -195,8 +273,12 @@ class ProdukInovasiController extends Controller
      * @param  \App\Models\Produk  $produk
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Produk $produk)
+    public function destroy($id)
     {
-        //
+        Produk::where("id_Produk",$id)->delete();
+        FotoProduk::where("idProdukInovasi",$id)->delete();
+        VideoProduk::where("idProdukInovasi",$id)->delete();
+        return redirect()->back();
+
     }
 }

@@ -67,30 +67,40 @@
                         </center>
 
                         <div style="margin-bottom:30px">
-                            <form action="indexproduk/search" method="POST" enctype="multipart/form-data">
+                            <form action="/indexproduk/search" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div
                                     style="display:flex ;
                         flex-direction: row;
                         justify-content: flex-end;">
-                                    <select name="filter" class="lang-switcher transparent-btn">
+                                   
+                                    <select name="jenis" class="lang-switcher transparent-btn">
                                         <option value="" selected disabled>
-                                            Filter
+                                            Type
                                         </option>
-                                        <option value="mahasiswa">
-                                            Mahasiswa
+                                        <option value="Hardware">
+                                            Hardware
                                         </option>
-                                        <option value="dosen">
-                                            Dosen
+                                        <option value="Software">
+                                            Software
                                         </option>
-                                        <option value="semua">
-                                            Semua
+                                        
+                                    </select>
+                                    <select name="kategori" class="lang-switcher transparent-btn">
+                                        <option value="" selected disabled>
+                                            Category
                                         </option>
+                                        @foreach ($kategori as $k)
+                                        <option value="{{$k->idKategoriProduk}}">
+                                            {{$k->nama_kategori}}
+                                        </option>
+                                        @endforeach
+                                        
                                     </select>
                                     <input name="cari" style="margin: 10px; padding:10px" placeholder="Search..."
                                         type="text" />
 
-                                    <input type="submit" hidden />
+                                    <input type="submit" value="Filter"  style="margin: 10px; background-color:#2F49D1; width:150px; height:45px; border-radius:200px; color:white"/>
                                 </div>
                             </form>
                         </div>
@@ -116,8 +126,8 @@
                                             @endif
                                         @endforeach
                                     </div>
-                                    <div style="padding: 10px">
-                                        <h4 style="color: #00465f"><a>{{ $p->judul }}</a>
+                                    <div style="padding: 20px">
+                                        <h4 style="color: #00465f" ><a>{{ $p->judul }}</a>
                                         </h4>
                                         <h6 style="padding-top: 5px; color:#00465f">
                                             @foreach ($users as $u)

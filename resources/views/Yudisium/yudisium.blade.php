@@ -341,6 +341,15 @@
                                         required>
                                 </div>
                                 <div class="col-lg-5">
+                                    <select id="jenis" name="jenis"
+                                        style="border:0px; width:100%; height:40px; border-radius:5px; padding:10px; color:grey; margin-right:10px; margin-bottom:10px;"
+                                        required>
+                                        <option value=" " selected disabled>Pilih Jenis</option>
+                                        <option value="Hardware">Hardware</option>
+                                        <option value="Software">Software</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-5">
                                 <select name="id_mahasiswa" style="background-color:white; padding:10px; margin-right:10px; margin-bottom:10px; width:100%; "
                                     >
                                     <option selected disabled hidden>Pilih User (Debug use only)</option>
@@ -384,6 +393,9 @@
                         <script>
                             var modal = document.getElementById("myModal");
                             modal.style.display = "block"
+                            setTimeout(() => {
+                                modal.style.display = "none"
+                            }, 2000);
                         </script>
                     @endif
 

@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string("key_partner", 255)->nullable();
             $table->char("nilai_tkt", 255)->nullable();
             $table->text("gambaran_pesaing")->nullable();
+            $table->string("jenis",255)->nullable();
+
             $table->char("uniques_selling_point", 255)->nullable();
             $table->timestamps();
         });

@@ -11,6 +11,6 @@ class Produk extends Model
 
     protected $table="produk_inovasi";
     protected $primaryKey = "id_Produk";
-    protected $fillable = ['id_Produk','id_Kategori','id_mahasiswa','judul','gambaran_pesaing','segmen_customer','key_partner','nilai_tkt','uniques_selling_point'];
+    protected $fillable = ['id_Produk','id_Kategori','id_mahasiswa','judul','gambaran_pesaing','segmen_customer','key_partner','nilai_tkt','jenis','uniques_selling_point'];
 
 }

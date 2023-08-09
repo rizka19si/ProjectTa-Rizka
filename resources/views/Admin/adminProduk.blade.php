@@ -16,9 +16,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Projek TA</title>
         <!-- Favicon -->
-        <link rel="shortcut icon" href="./img/svg/logo.svg" type="image/x-icon">
+        <link rel="shortcut icon" href="{{asset('./img/svg/logo.svg')}}" type="image/x-icon">
         <!-- Custom styles -->
-        <link rel="stylesheet" href="./css/style.min.css">
+        <link rel="stylesheet" href="{{asset('./css/style.min.css')}}">
     </head>
     <style>
         .new-button {
@@ -45,106 +45,106 @@
         .button-wrap {
             position: relative;
         }
+
         ::placeholder {
-        color: grey;
-    }
-
-
-    /* The Modal (background) */
-    .modal {
-        display: none;
-        /* Hidden by default */
-        position: fixed;
-        /* Stay in place */
-        z-index: 1;
-        /* Sit on top */
-        padding-top: 100px;
-        /* Location of the box */
-        left: 0;
-        top: 0;
-        width: 100%;
-        /* Full width */
-        height: 100%;
-        /* Full height */
-        overflow: auto;
-        /* Enable scroll if needed */
-        background-color: rgb(0, 0, 0);
-        /* Fallback color */
-        background-color: rgba(0, 0, 0, 0.4);
-        /* Black w/ opacity */
-    }
-
-    /* Modal Content */
-    .modal-content {
-        position: relative;
-        background-color: #fefefe;
-        margin: auto;
-        padding: 0;
-        border-radius: 10px;
-        overflow: hidden;
-        width: 80%;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        -webkit-animation-name: animatetop;
-        -webkit-animation-duration: 0.4s;
-        animation-name: animatetop;
-        animation-duration: 0.4s
-    }
-
-    /* Add Animation */
-    @-webkit-keyframes animatetop {
-        from {
-            top: -300px;
-            opacity: 0
+            color: grey;
         }
 
-        to {
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            padding-top: 100px;
+            /* Location of the box */
+            left: 0;
             top: 0;
-            opacity: 1
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
         }
-    }
 
-    @keyframes animatetop {
-        from {
-            top: -300px;
-            opacity: 0
+        /* Modal Content */
+        .modal-content {
+            position: relative;
+            background-color: #fefefe;
+            margin: auto;
+            padding: 0;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 80%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s
         }
 
-        to {
-            top: 0;
-            opacity: 1
+        /* Add Animation */
+        @-webkit-keyframes animatetop {
+            from {
+                top: -300px;
+                opacity: 0
+            }
+
+            to {
+                top: 0;
+                opacity: 1
+            }
         }
-    }
 
-    /* The Close Button */
-    .close {
-        color: white;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
+        @keyframes animatetop {
+            from {
+                top: -300px;
+                opacity: 0
+            }
 
-    .close:hover,
-    .close:focus {
-        color: #000;
-        text-decoration: none;
-        cursor: pointer;
-    }
+            to {
+                top: 0;
+                opacity: 1
+            }
+        }
 
-    .modal-header {
-        padding: 16px;
-        background-color: #234374;
-        color: white;
-    }
+        /* The Close Button */
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
 
-    .modal-body {
-        padding: 2px 16px;
-    }
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
 
-    .modal-footer {
-        padding: 2px 16px;
-        background-color: #234374;
-        color: white;
-    }
+        .modal-header {
+            padding: 16px;
+            background-color: #234374;
+            color: white;
+        }
+
+        .modal-body {
+            padding: 2px 16px;
+        }
+
+        .modal-footer {
+            padding: 2px 16px;
+            background-color: #234374;
+            color: white;
+        }
     </style>
 
     <body>
@@ -159,8 +159,8 @@
                         <a href="##" class="logo-wrapper">
                             <span class="sidebar-user-img">
                                 <picture>
-                                    <source srcset="./img/avatar/avatar-illustrated-01.webp" type="image/webp"><img
-                                        src="./img/avatar/avatar-illustrated-01.png" alt="User name">
+                                    <source srcset="{{asset('./img/avatar/avatar-illustrated-01.png')}}" type="image/webp"><img
+                                        src="{{asset('./img/avatar/avatar-illustrated-01.png')}}" alt="User name">
                                 </picture>
                             </span>
                             <div class="sidebar-user-info">
@@ -339,7 +339,7 @@
                                     </div>
                                     <div class="col-lg-5">
                                         <div class="button-wrap">
-                                            <label class="new-button" for="photos" style="width: 180px"> Foto
+                                            <label class="new-button" for="photos" style="width: 180px; background-color:#234374"> Foto
                                                 Produk
                                                 Inovasi
                                                 <input id="photos" name="Photos[]" type="file"
@@ -402,7 +402,7 @@
                                     </div>
                                     <div class="col-lg-5">
                                         <div class="button-wrap" style="margin-bottom: 10px;">
-                                            <label class="new-button" for="videoProduk"> Video Produk Inovasi
+                                            <label class="new-button" for="videoProduk" style=" background-color:#234374"> Video Produk Inovasi
                                                 <input id="videoProduk" name="Video" type="file"
                                                     accept="video/mp4, video/x-m4v" style="margin-left: 79px"
                                                     required>
@@ -432,10 +432,20 @@
                                             required>
                                     </div>
                                     <div class="col-lg-5">
-                                        
-                                        <input type="text" id="id_mahasiswa" name="id_mahasiswa" value="{{session()->get('id')}}"
-                                        style="background-color:white; padding:10px; margin-right:10px; margin-bottom:10px; width:100%; "
-                                        hidden required>
+                                        <select id="jenis" name="jenis"
+                                            style="border:0px; width:100%; height:40px; border-radius:5px; padding:10px; color:grey; margin-right:10px; margin-bottom:10px;"
+                                            required>
+                                            <option value=" " selected disabled>Pilih Jenis</option>
+                                            <option value="Hardware">Hardware</option>
+                                            <option value="Software">Software</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-5">
+
+                                        <input type="text" id="id_mahasiswa" name="id_mahasiswa"
+                                            value="{{ session()->get('id') }}"
+                                            style="background-color:white; padding:10px; margin-right:10px; margin-bottom:10px; width:100%; "
+                                            hidden>
                                     </div>
 
 
@@ -449,6 +459,59 @@
                             </div>
 
                         </form>
+                        <form action="/produk/filter" method="POST">
+                            @csrf
+                        <div class="row" style="margin: 20px">
+                            <div class="col-lg-12" style="margin: 20px">
+                                Filter
+                            </div>
+                           
+                                <div class="col-lg-5">
+                                    <select id="segmen" name="segmen_customer"
+                                        style="border:0px; width:100%; height:40px; border-radius:5px; padding:10px; color:grey; margin-right:10px; margin-bottom:10px;">
+                                        <option value=" " selected disabled>Pilih Segmen Customer</option>
+                                        <option value="Umum">Umum</option>
+                                        <option value="Privat">Privat</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-5">
+                                    <select name="id_Kategori" id="IdKategori"
+                                        style="border:0px; width:100%; height:40px; border-radius:5px; padding:10px; color:grey; margin-right:10px; margin-bottom:10px">
+                                        <option value=" " selected disabled>Pilih Kategori</option>
+                                        @foreach ($kategori as $kate)
+                                            <option value="{{ $kate->idKategoriProduk }}">
+                                                {{ $kate->nama_kategori }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-lg-2">
+                                    <button type="submit"
+                                        style="right:0px; background-color:#234374; width:150px; height:45px; border-radius:10px; color:white">
+                                        Filter </button>
+                                </div>
+                            
+                        </div>
+                        @if ($errors->any())
+                        <div id="myModal" class="modal" style="">
+
+                            <!-- Modal content -->
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <p style="padding: 5%">{{ $errors->first() }}</p>
+                            </div>
+
+                        </div>
+
+                        <script>
+                            var modal = document.getElementById("myModal");
+                            modal.style.display = "block"
+                            setTimeout(() => {
+                                modal.style.display = "none"
+                            }, 2000);
+                        </script>
+                    @endif
+                    </form>
                         <div class="row" style="margin: 20px">
                             <div class="col">
 
@@ -487,9 +550,181 @@
                                                     <td>
                                                         <a href="produk/{{ $item->id_Produk }}">
                                                             < View>
-                                                        </a>
+                                                        </a><br><br>
+                                                        <!-- Trigger/Open The Modal -->
+                                                        <button class="btn" id="myBtn{{ $item->id_Produk }}"
+                                                            style="background-color: transparent;">
+                                                            < Edit>
+                                                        </button>
+
+                                                        <!-- The Modal -->
+                                                        <div id="myModal{{ $item->id_Produk }}" class="modal">
+
+                                                            <!-- Modal content -->
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <span class="close">&times;</span>
+                                                                    <h2 style="color: #fff; margin:20px">Edit Produk
+                                                                    </h2>
+                                                                </div>
+                                                                <form action="produk/update" method="POST"
+                                                                    enctype="multipart/form-data">
+                                                                    @csrf
+                                                                    <div class="modal-body">
+                                                                        <div class="row" style="margin: 20px">
+
+                                                                            <input type="text" name="id_produk"
+                                                                                value="{{ $item->id_Produk }}"
+                                                                                style="background-color:white; padding:10px; width:100%; height:80%; margin-right:10px; margin-bottom:10px"
+                                                                                hidden required>
+                                                                            <div class="col-lg-12">
+                                                                                <input type="text" name="judul"
+                                                                                    id="judul"
+                                                                                    placeholder="Masukan Judul"
+                                                                                    value="{{ $item->judul }}"
+                                                                                    style="background-color:white; padding:10px; width:100%; height:80%; margin-right:10px; margin-bottom:10px"
+                                                                                    required>
+                                                                            </div>
+
+                                                                            <div class="col-lg-12">
+                                                                                <textarea name="gambaran_pesaing" id="gambaran" placeholder="Gambaran Pesaing"
+                                                                                    style="background-color:white; padding:10px; border-radius:5px; border:0px; width:100%; margin-right:10px; margin-bottom:10px"
+                                                                                    required>{{ $item->gambaran_pesaing }}</textarea>
+                                                                            </div>
+                                                                            {{-- <input type="hidden" name="" value="-"> --}}
+
+
+                                                                            <div class="col-lg-5">
+                                                                                <div class="button-wrap">
+                                                                                    <label class="new-button"
+                                                                                        for="photos"
+                                                                                        style="width: 180px"> Foto
+                                                                                        Produk
+                                                                                        Inovasi
+                                                                                        <input id="photos"
+                                                                                            name="Photos[]"
+                                                                                            type="file"
+                                                                                            style="margin-left: 72px"
+                                                                                            accept="image/png, image/jpeg, image/jpg"
+                                                                                            multiple>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+
+
+
+                                                                            <div class="col-lg-5">
+                                                                                <div class="button-wrap"
+                                                                                    style="margin-bottom: 10px;">
+                                                                                    <label class="new-button"
+                                                                                        for="videoProduk"> Video Produk
+                                                                                        Inovasi
+                                                                                        <input id="videoProduk"
+                                                                                            name="Video"
+                                                                                            type="file"
+                                                                                            accept="video/mp4, video/x-m4v"
+                                                                                            style="margin-left: 79px">
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-12">
+                                                                                <select id="segmen"
+                                                                                    name="segmen_customer"
+                                                                                    style="border:0px; width:100%; height:40px; border-radius:5px; padding:10px; color:grey; margin-right:10px; margin-bottom:10px;"
+                                                                                    required>
+                                                                                    <option
+                                                                                        value="{{ $item->segmen_customer }}"
+                                                                                        selected>
+                                                                                        {{ $item->segmen_customer }}
+                                                                                    </option>
+                                                                                    <option value="Umum">Umum
+                                                                                    </option>
+                                                                                    <option value="Privat">Privat
+                                                                                    </option>
+                                                                                </select>
+                                                                            </div>
+
+                                                                            <div class="col-lg-12">
+                                                                                <input type="text" id="unique"
+                                                                                    name="uniques_selling_point"
+                                                                                    placeholder="Masukan Unique Selling Point"
+                                                                                    value="{{ $item->uniques_selling_point }}"
+                                                                                    style="background-color:white; padding:10px; margin-right:10px; margin-bottom:10px; width:100%; "
+                                                                                    required>
+                                                                            </div>
+                                                                            <div class="col-lg-12">
+                                                                                <input type="text" id="key_partner"
+                                                                                    name="key_partner"
+                                                                                    value="{{ $item->key_partner }}"
+                                                                                    placeholder="Masukan Key Partner"
+                                                                                    style="background-color:white; padding:10px; margin-right:10px; margin-bottom:10px; width:100%; "
+                                                                                    required>
+                                                                            </div>
+                                                                            <div class="col-lg-5">
+                                                                                <select id="jenis" name="jenis"
+                                                                                    style="border:0px; width:100%; height:40px; border-radius:5px; padding:10px; color:grey; margin-right:10px; margin-bottom:10px;"
+                                                                                    required>
+                                                                                    <option value=" {{ $item->jenis }}" selected disabled>Pilih Jenis</option>
+                                                                                    <option value="Hardware">Hardware</option>
+                                                                                    <option value="Software">Software</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="col-lg-5">
+
+                                                                                <input type="text"
+                                                                                    id="id_mahasiswa"
+                                                                                    name="id_mahasiswa"
+                                                                                    value="{{ session()->get('id') }}"
+                                                                                    style="background-color:white; padding:10px; margin-right:10px; margin-bottom:10px; width:100%; "
+                                                                                    hidden>
+                                                                            </div>
+
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit"
+                                                                            style="right:0px; background-color:white; width:150px; height:40px; margin:20px; border-radius:10px; color:#234374">
+                                                                            Simpan </button>
+                                                                        <a href="produk/hapus/{{ $item->id_Produk }}"
+                                                                            style="right:0px; background-color:white; width:250px; height:40px; margin:20px; padding:10px; border-radius:10px; color:rgb(253, 66, 66)">
+                                                                            Hapus
+                                                                        </a><br>
+                                                                    </div>
+                                                            </div>
+
+                                                        </div>
+
                                                     </td>
                                                 </tr>
+                                                <script>
+                                                    // Get the modal
+                                                    var modal{{ $item->id_Produk }} = document.getElementById("myModal{{ $item->id_Produk }}");
+
+                                                    // Get the button that opens the modal
+                                                    var btn{{ $item->id_Produk }} = document.getElementById("myBtn{{ $item->id_Produk }}");
+
+                                                    // Get the <span> element that closes the modal
+                                                    var span{{ $item->id_Produk }} = document.getElementsByClassName("close")[0];
+
+                                                    // When the user clicks on the button, open the modal
+                                                    btn{{ $item->id_Produk }}.onclick = function() {
+                                                        modal{{ $item->id_Produk }}.style.display = "block";
+                                                    }
+
+                                                    // When the user clicks on <span> (x), close the modal
+                                                    span{{ $item->id_Produk }}.onclick = function() {
+                                                        modal{{ $item->id_Produk }}.style.display = "none";
+                                                    }
+
+                                                    // When the user clicks anywhere outside of the modal, close it
+                                                    window.onclick = function(event) {
+                                                        if (event.target == modal) {
+                                                            modal{{ $item->id_Produk }}.style.display = "none";
+                                                        }
+                                                    }
+                                                </script>
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -520,18 +755,18 @@
 
         <script>
             var modal = document.getElementById("myModal");
-    
-    
+
+
             // var span = document.getElementByid("close");
-    
+
             // // When the user clicks the button, open the modal 
-    
-    
+
+
             // // When the user clicks on <span> (x), close the modal
             // span.onclick = function() {
             //     modal.style.display = "none";
             // }
-    
+
             // When the user clicks anywhere outside of the modal, close it
             window.onclick = function(event) {
                 if (event.target == modal) {
@@ -539,23 +774,23 @@
                 }
             }
         </script>
-    
+
         <script>
             // Get the modal
             var modaltkt = document.getElementById("modaltkt");
-    
+
             // Get the button that opens the modal
             var btntkt = document.getElementById("tktbtn");
-    
-    
-    
+
+
+
             // When the user clicks the button, open the modal 
             btntkt.onclick = function() {
                 modaltkt.style.display = "block";
             }
-    
-    
-    
+
+
+
             // When the user clicks anywhere outside of the modal, close it
             window.onclick = function(event) {
                 if (event.target == modaltkt) {
@@ -563,7 +798,7 @@
                 }
             }
         </script>
-    
+
         <script>
             var httphost = window.location.origin;
             const tableData = document.getElementById('tableData');
@@ -577,7 +812,7 @@
                         console.log(data);
                         tableData.replaceChildren();
                         data.forEach(d => {
-    
+
                             const dataRow = `<tr>
                                                         <td>
                                                             ${d.id_Produk }
@@ -596,16 +831,16 @@
                                                             </a>
                                                         </td>
                                                         </tr>`;
-    
-    
+
+
                             tableData.innerHTML += dataRow;
-    
+
                         });
                     })
                     .catch(error => console.log(error));
             };
         </script>
-    
+
         <script>
             var idKategori = document.getElementById("IdKategori");
             const head = document.getElementById('indikatorPertanyaan');
@@ -614,15 +849,15 @@
                                 <td>Mohon Pilih Kategori Terlebih Dahulu.</td>
                                 <td></td>
                             </tr>`;
-    
+
             var i = 0;
             var indexInfo = 0;
             var n = 0;
             var idKategori = 0;
-    
+
             function onChangeIdKategori(valu, index) {
                 var tktTemp = 0;
-    
+
                 fetch(httphost + '/api/tktcount/' + valu)
                     .then(res => {
                         return res.json();
@@ -637,11 +872,11 @@
                         nilaical();
                     });
             }
-    
+
             function indikatornilai(valu, tktInfo) {
-               
+
                 head.replaceChildren();
-    
+
                 fetch(httphost + '/api/indikator/' + valu + '/' + tktInfo)
                     .then(res => {
                         return res.json();
@@ -676,6 +911,7 @@
                     })
                     .catch(error => console.log(error));
             }
+
             function nilaical() {
                 var nilai = 0;
                 var total = 0;
@@ -700,10 +936,10 @@
                         document.getElementById('total').value = 'TKT ' + (indexInfo);
                     }
                 }
-    
+
                 console.log(total);
-    
-    
+
+
             }
         </script>
     </body>

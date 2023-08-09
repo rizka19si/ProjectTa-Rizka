@@ -49,7 +49,12 @@ Route::get('/userlogin/logout', [LoginController::class, 'logoutUser']);
 
 Route::get('/produk', [ProdukInovasiController::class, 'index']);
 Route::post('/produk/store', [ProdukInovasiController::class, 'store']);
+Route::post('/produk/filter', [ProdukInovasiController::class, 'filter']);
 Route::get('/produk/{id}', [ProdukInovasiController::class, 'produkDetail']);
+Route::post('/produk/update', [ProdukInovasiController::class, 'update']);
+Route::get('/produk/hapus/{id}', [ProdukInovasiController::class, 'destroy']);
+
+
 
 
 Route::get('/kategori', [KategoriController::class, 'index']);

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-@php
+{{-- @php
     if (session()->has('email') != null) {
     } else {
-        echo "<script>
+        echo `<script>
             location.href = '/adminlogin ';
-        </script>";
+        </script>`;
     }
-@endphp
+@endphp --}}
 @foreach ($user as $p)
 
     <head>
@@ -19,6 +19,21 @@
         <link rel="shortcut icon" href="./img/svg/logo.svg" type="image/x-icon">
         <!-- Custom styles -->
         <link rel="stylesheet" href="./css/style.min.css">
+        <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+        <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+        <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+        <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+        <style>
+            #kategoriChart {
+                width: 100%;
+                height: 500px;
+            }
+
+            #jenisChart {
+                width: 100%;
+                height: 500px;
+            }
+        </style>
     </head>
 
     <body>
@@ -124,48 +139,22 @@
                                     <span class="icon notification active" aria-hidden="true"></span>
                                 </button>
                                 <ul class="users-item-dropdown notification-dropdown dropdown">
+                                    @foreach ($produkBaru as $item)
+                                                    
+                                               
                                     <li>
-                                        <a href="##">
-                                            <div class="notification-dropdown-icon info">
-                                                <i data-feather="check"></i>
-                                            </div>
-                                            <div class="notification-dropdown-text">
-                                                <span class="notification-dropdown__title">System just updated</span>
-                                                <span class="notification-dropdown__subtitle">The system has been
-                                                    successfully upgraded. Read more
-                                                    here.</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="##">
+                                        <a href="/produk">
                                             <div class="notification-dropdown-icon danger">
                                                 <i data-feather="info" aria-hidden="true"></i>
                                             </div>
                                             <div class="notification-dropdown-text">
-                                                <span class="notification-dropdown__title">The cache is full!</span>
-                                                <span class="notification-dropdown__subtitle">Unnecessary caches take
-                                                    up a
-                                                    lot of memory space and
-                                                    interfere ...</span>
+                                                <span class="notification-dropdown__title">Produk Baru</span>
+                                                <span class="notification-dropdown__subtitle"> {{ $item->judul }}</span>
                                             </div>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="##">
-                                            <div class="notification-dropdown-icon info">
-                                                <i data-feather="check" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="notification-dropdown-text">
-                                                <span class="notification-dropdown__title">New Subscriber here!</span>
-                                                <span class="notification-dropdown__subtitle">A new subscriber has
-                                                    subscribed.</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="link-to-page" href="##">Go to Notifications page</a>
-                                    </li>
+                                    @endforeach
+                                   
                                 </ul>
                             </div>
 
@@ -178,13 +167,14 @@
                         <h2 class="main-title">Dashboard</h2>
 
                         <div class="container">
-                            <div class="row" style="width:100%; margin:0px;">
-                                <div class="chart"
-                                    style="background-color: white; border-radius:10px; display:flex; flex-direction:row; align-items:center; padding:30px;">
+                            <div class="row">
+
+                                <div class="col-5"
+                                    style="background-color: white; border-radius:10px; display:flex; flex-direction:row; align-items:center; padding:30px; margin:20px">
                                     <div
                                         style="display:flex; align-items:center; flex-direction:column; margin-right:5%">
                                         <div><img src="./img/avatar/avatar-illustrated-01.png" alt="Lala"
-                                                width="280" style="border-radius: 50%;"> </div>
+                                                width="130" style="border-radius: 50%;"> </div>
                                         <div>
                                             <h3 style="color:cornflowerblue">{{ $p->name }}</h3>
                                         </div>
@@ -192,61 +182,78 @@
                                     <div style="display:flex; flex-direction:column;">
                                         <label>nama lengkap</label>
                                         <div>
-                                            <h3 style="color:cornflowerblue; margin-bottom:20px;">{{ $p->name }}
+                                            <h3 style="color:cornflowerblue; margin-bottom:20px;">
+                                                {{ $p->name }}
                                             </h3>
                                         </div>
 
                                         <label>email</label>
                                         <div>
-                                            <h3 style="color:cornflowerblue; margin-bottom:20px;">{{ $p->email }}
+                                            <h3 style="color:cornflowerblue; margin-bottom:20px;">
+                                                {{ $p->email }}
                                             </h3>
                                         </div>
                                     </div>
                                 </div>
+
+
                             </div>
+                            <div class="row">
+                                <div class="col-5"
+                                    style="background-color: white; border-radius:10px; display:flex; flex-direction:row; align-items:center; padding:30px; margin:20px">
+                                    <div id="kategoriChart"> </div>
+                                </div>
+                                <div class="col-5"
+                                    style="background-color: white; border-radius:10px; display:flex; flex-direction:row; align-items:center; padding:30px; margin:20px">
+                                    <div id="jenisChart"> </div>
+                                </div>
+                            </div>
+                           
                             <div class="row" style="width:100%; margin:0px">
-                                <div class="users-table table-wrapper">
-                                    <table class="posts-table">
-                                        <thead>
-                                            <tr class="users-table-info">
-                                                <th>
-                                                    no
-                                                </th>
-                                                <th>Title</th>
-                                                <th>Katagori</th>
-                                                <th>TKT</th>
-                                                <th>Segmen Customer</th>
-                                                <th> </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($produk as $item)
-                                                <tr>
-                                                    <td>
-                                                        {{ $item->id_Produk }}
-                                                    </td>
-                                                    <td>
-                                                        {{ $item->judul }}
-                                                    </td>
-                                                    <td>
-                                                        @foreach ($kategori as $k)
-                                                            @if ($item->id_Kategori == $k->idKategoriProduk)
-                                                                {{ $k->nama_kategori }}
-                                                            @endif
-                                                        @endforeach
-                                                    
-                                                    </td>
-                                                    <td> {{ $item->nilai_tkt }}</td>
-                                                    <td> {{ $item->segmen_customer }}</td>
-                                                    <td>
-                                                        <a href="produk/{{$item->id_Produk}}">
-                                                            < View >
-                                                        </a>
-                                                    </td>
+                                <div class="col-12">
+                                    <div class="users-table table-wrapper">
+                                        <table class="posts-table">
+                                            <thead>
+                                                <tr class="users-table-info">
+                                                    <th>
+                                                        no
+                                                    </th>
+                                                    <th>Title</th>
+                                                    <th>Katagori</th>
+                                                    <th>TKT</th>
+                                                    <th>Segmen Customer</th>
+                                                    <th> </th>
                                                 </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($produk as $item)
+                                                    <tr>
+                                                        <td>
+                                                            {{ $item->id_Produk }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $item->judul }}
+                                                        </td>
+                                                        <td>
+                                                            @foreach ($kategori as $k)
+                                                                @if ($item->id_Kategori == $k->idKategoriProduk)
+                                                                    {{ $k->nama_kategori }}
+                                                                @endif
+                                                            @endforeach
+
+                                                        </td>
+                                                        <td> {{ $item->nilai_tkt }}</td>
+                                                        <td> {{ $item->segmen_customer }}</td>
+                                                        <td>
+                                                            <a href="produk/{{ $item->id_Produk }}">
+                                                                < View>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -264,6 +271,164 @@
                 </footer>
             </div>
         </div>
+        <script>
+            am5.ready(function() {
+
+                // Create root element
+                // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+                var root = am5.Root.new("kategoriChart");
+
+
+                // Set themes
+                // https://www.amcharts.com/docs/v5/concepts/themes/
+                root.setThemes([
+                    am5themes_Animated.new(root)
+                ]);
+
+
+                // Create chart
+                // https://www.amcharts.com/docs/v5/charts/xy-chart/
+                var chart = root.container.children.push(am5xy.XYChart.new(root, {
+                    panX: true,
+                    panY: true,
+                    wheelX: "panX",
+                    wheelY: "zoomX",
+                    pinchZoomX: true
+                }));
+
+                // Add cursor
+                // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+                var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
+                cursor.lineY.set("visible", false);
+
+
+                // Create axes
+                // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+                var xRenderer = am5xy.AxisRendererX.new(root, {
+                    minGridDistance: 30
+                });
+                xRenderer.labels.template.setAll({
+                    rotation: -90,
+                    centerY: am5.p50,
+                    centerX: am5.p100,
+                    paddingRight: 15
+                });
+
+                xRenderer.grid.template.setAll({
+                    location: 1
+                })
+
+                var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+                    maxDeviation: 0.3,
+                    categoryField: "country",
+                    renderer: xRenderer,
+                    tooltip: am5.Tooltip.new(root, {})
+                }));
+
+                var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+                    maxDeviation: 0.3,
+                    renderer: am5xy.AxisRendererY.new(root, {
+                        strokeOpacity: 0.1
+                    })
+                }));
+
+
+                // Create series
+                // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+                var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+                    name: "Series 1",
+                    xAxis: xAxis,
+                    yAxis: yAxis,
+                    valueYField: "value",
+                    sequencedInterpolation: true,
+                    categoryXField: "country",
+                    tooltip: am5.Tooltip.new(root, {
+                        labelText: "{valueY}"
+                    })
+                }));
+
+                series.columns.template.setAll({
+                    cornerRadiusTL: 5,
+                    cornerRadiusTR: 5,
+                    strokeOpacity: 0
+                });
+                series.columns.template.adapters.add("fill", function(fill, target) {
+                    return chart.get("colors").getIndex(series.columns.indexOf(target));
+                });
+
+                series.columns.template.adapters.add("stroke", function(stroke, target) {
+                    return chart.get("colors").getIndex(series.columns.indexOf(target));
+                });
+
+
+                // Set data
+                var data = [
+                @foreach($perKategori as $kateg)    
+                {
+                    country: @foreach($kategori as $k) @if($k->idKategoriProduk == $kateg->id_Kategori) "{{$k->nama_kategori}}" @endif @endforeach,
+                    value: {{$kateg->jumlah}}
+                },
+            @endforeach
+         ];
+
+                xAxis.data.setAll(data);
+                series.data.setAll(data);
+
+
+                // Make stuff animate on load
+                // https://www.amcharts.com/docs/v5/concepts/animations/
+                series.appear(1000);
+                chart.appear(1000, 100);
+
+            }); // end am5.ready()
+        </script>
+
+
+<script>
+    am5.ready(function() {
+    
+    // Create root element
+    // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+    var root = am5.Root.new("jenisChart");
+    
+    
+    // Set themes
+    // https://www.amcharts.com/docs/v5/concepts/themes/
+    root.setThemes([
+      am5themes_Animated.new(root)
+    ]);
+    
+    
+    // Create chart
+    // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
+    var chart = root.container.children.push(am5percent.PieChart.new(root, {
+      layout: root.verticalLayout
+    }));
+    
+    
+    // Create series
+    // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
+    var series = chart.series.push(am5percent.PieSeries.new(root, {
+      valueField: "value",
+      categoryField: "category"
+    }));
+    
+    
+    // Set data
+    // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
+    series.data.setAll([
+      @foreach($perJenis as $jen)
+      { value: {{$jen->jumlah}}, category: "{{$jen->jenis}}" },
+      @endforeach
+    ]);
+    
+    
+    // Play initial series animation
+    // https://www.amcharts.com/docs/v5/concepts/animations/#Animation_of_series
+    series.appear(1000, 100);
+    
+    }); // end am5.ready()
+    </script>
         <!-- Chart library -->
         <script src="./plugins/chart.min.js"></script>
         <!-- Icons library -->
