@@ -164,11 +164,7 @@ class ProdukInovasiController extends Controller
             }
             VideoProduk::create($videoFile);
 
-<<<<<<< HEAD
             return redirect()->back();
-=======
-            return redirect()->back();
->>>>>>> 2f4f0f74fc3259f6b0bfb4b33fceea683d633349
         } else {
             return redirect()->back()->with('failed_upload', 'Your Photo is size is not under 2000kb or wrong extention.');
         }
