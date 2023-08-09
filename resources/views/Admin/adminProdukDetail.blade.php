@@ -306,6 +306,12 @@
                                         <div style="padding:10px; color:#234374">
                                             <p>{{ $p->gambaran_pesaing }}</p>
                                         </div>
+                                        <div style="padding:5px; color:grey">
+                                            <h6>Jenis</h6>
+                                        </div>
+                                        <div style="padding:10px; color:#234374">
+                                            <p>{{ $p->jenis }}</p>
+                                        </div>
                                         <div style="display:flex">
                                         </div>
                                     </div>
