@@ -304,7 +304,7 @@
 
 
                         <h3 style="color: cornflowerblue; font-weight:400"></h3>
-                        <form action="/produk/store" method="POST" {{-- onsubmit="SendData()"  --}} id="yudisiumform"
+                        <form action="/produk/store" method="POST" id="yudisiumform"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="container">
@@ -432,6 +432,7 @@
                                             required>
                                     </div>
                                     <div class="col-lg-5">
+<<<<<<< HEAD
                                         <select id="jenis" name="jenis"
                                             style="border:0px; width:100%; height:40px; border-radius:5px; padding:10px; color:grey; margin-right:10px; margin-bottom:10px;"
                                             required>
@@ -446,6 +447,12 @@
                                             value="{{ session()->get('id') }}"
                                             style="background-color:white; padding:10px; margin-right:10px; margin-bottom:10px; width:100%; "
                                             hidden>
+=======
+                                        
+                                        <input type="text" id="id_mahasiswa" name="id_mahasiswa" value="{{Auth::user()->id}}"
+                                        style="background-color:white; padding:10px; margin-right:10px; margin-bottom:10px; width:100%; "
+                                        hidden required>
+>>>>>>> 2f4f0f74fc3259f6b0bfb4b33fceea683d633349
                                     </div>
 
 
